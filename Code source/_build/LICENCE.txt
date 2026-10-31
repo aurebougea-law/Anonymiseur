@@ -1,0 +1,56 @@
+ANONYMISEUR, version 2026.10.1
+LICENCE
+=======
+
+Auteur : Aurélien Bougeard, avocat.
+
+Anonymiseur est un logiciel libre, diffusé sous la licence GNU Affero
+General Public License, version 3 (AGPL v3). Le texte complet de la
+licence, qui seul fait foi, est dans le fichier LICENSE_AGPL-3.0.txt.
+Ce qui suit la résume en langage courant.
+
+CE QUE VOUS POUVEZ FAIRE
+- L'utiliser librement, pour votre pratique, sans limite de durée ni de
+  nombre de postes.
+- Le transmettre à d'autres, tel quel.
+- Le modifier et diffuser votre version, à une condition : la diffuser
+  sous cette même licence, avec son code source, en conservant la mention
+  de l'auteur d'origine. Ce qui est parti libre reste libre.
+- Adapter à votre matière les tables Excel (dossiers, balises, rôles) :
+  elles sont faites pour cela, et vous êtes invité à partager vos grilles.
+
+CE QUE VOUS NE POUVEZ PAS FAIRE
+- Diffuser une version modifiée sans son code source, ou sous une autre
+  licence.
+- Retirer le nom de l'auteur ou présenter le programme comme votre
+  propre travail.
+
+LE CODE SOURCE
+Il est joint, dans le dossier « Code source » : les modules Python, les
+réglages et les scripts qui fabriquent l'exécutable. Vous pouvez le lire,
+le vérifier, le modifier. Aucun savoir-faire particulier n'est demandé
+pour utiliser le programme : l'exécutable suffit.
+
+AUCUNE GARANTIE
+Le programme est fourni « en l'état », sans garantie d'aucune sorte
+(articles 15 et 16 de la licence). Il aide, il ne remplace pas la
+relecture : ce qui est déposé dans un outil d'intelligence artificielle
+reste sous la seule responsabilité de la personne qui l'y dépose.
+
+COMPOSANTS TIERS
+Le programme embarque PyMuPDF (licence AGPL v3, la même), ainsi que
+Python, python-docx, openpyxl et lxml (licences libres permissives).
+Le dossier Tesseract contient Tesseract OCR (licence Apache 2.0, jointe)
+et les bibliothèques qui l'accompagnent. La liste complète, avec les
+versions et les licences, est dans COMPOSANTS_TIERS.txt.
+
+EMPREINTES
+EMPREINTES_SHA256.txt donne l'empreinte de chaque fichier du paquet,
+pour repérer un fichier abîmé ou modifié. Pour vérifier que le zip reçu
+est bien l'original, comparez son empreinte à celle publiée avec le
+lien de téléchargement.
+
+CONTACT
+Remarques, grilles à partager, signalement d'un problème : en commentaire
+de la publication LinkedIn qui a diffusé le programme, ou sur la page
+LinkedIn qui lui est dédiée si elle existe.

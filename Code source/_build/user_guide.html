@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Anonymizator: user guide</title>
+<style>
+  @page { size: A4; margin: 13mm 14mm 15mm 14mm;
+          @bottom-left { content: "Anonymizator · user guide · version 2026.10.1"; font: 8pt "DejaVu Sans"; color: #8A96A3; }
+          @bottom-right { content: counter(page) " / " counter(pages); font: 8pt "DejaVu Sans"; color: #8A96A3; } }
+  body { font-family: "DejaVu Sans", "Segoe UI", sans-serif; font-size: 9pt; color: #1F2933; line-height: 1.35; }
+  h1 { font-size: 24pt; color: #1B3A5C; margin: 0 0 2mm 0; letter-spacing: -0.3pt; }
+  h2 { font-size: 14pt; color: #1B3A5C; margin: 0 0 4mm 0; padding-bottom: 1.5mm; border-bottom: 2px solid #1B3A5C; }
+  h3 { font-size: 10.5pt; color: #1B3A5C; margin: 5mm 0 1.5mm 0; }
+  p { margin: 0 0 2.5mm 0; }
+  .sous { color: #5F6B76; font-size: 11pt; margin-bottom: 6mm; }
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .bandeau { background: #1B3A5C; color: white; padding: 5mm 7mm; margin: -6mm -4mm 5mm -4mm; }
+  .bandeau h1 { color: white; }
+  .bandeau .sous { color: #C9D6E3; margin: 0; }
+  .etapes { display: flex; gap: 4mm; margin: 3mm 0 3mm 0; }
+  .etape { flex: 1; border: 1px solid #D9DFE5; border-top: 4px solid #1B3A5C; padding: 2.5mm 3.5mm; background: #FBFCFD; }
+  .etape .num { font-size: 20pt; font-weight: bold; color: #1B3A5C; line-height: 1; margin-bottom: 1.5mm; }
+  .etape .titre { font-weight: bold; margin-bottom: 1.5mm; }
+  .etape p { font-size: 8pt; color: #3E4A56; margin: 0 0 1.5mm 0; }
+  .teal { border-top-color: #2A6F77; } .teal .num { color: #2A6F77; }
+  .rouge { border-top-color: #B23B3B; } .rouge .num { color: #B23B3B; }
+  .vert { border-top-color: #2E7D4F; } .vert .num { color: #2E7D4F; }
+  .encadre { background: #E8EEF4; padding: 3.5mm 5mm; margin: 3mm 0 4mm 0; border-left: 4px solid #1B3A5C; }
+  .encadre.alerte { background: #F8ECEC; border-left-color: #B23B3B; }
+  .encadre .t { font-weight: bold; color: #1B3A5C; margin-bottom: 1mm; }
+  .encadre.alerte .t { color: #B23B3B; }
+  .cle { font-family: "DejaVu Sans Mono", monospace; font-size: 8.8pt; background: #EEF1F4; padding: 0 1.5mm; border-radius: 2px; }
+  table { border-collapse: collapse; width: 100%; margin: 2mm 0 4mm 0; font-size: 9pt; }
+  th { background: #1B3A5C; color: white; text-align: left; padding: 1.8mm 2.5mm; font-weight: bold; }
+  td { padding: 1mm 2.5mm; border-bottom: 1px solid #D9DFE5; vertical-align: top; }
+  tr.groupe td { background: #E8EEF4; font-weight: bold; color: #1B3A5C; }
+  .deux { display: table; width: 100%; border-spacing: 0; }
+  .deux > div { display: table-cell; width: 50%; vertical-align: top; padding-right: 5mm; }
+  .deux > div + div { padding-right: 0; padding-left: 2mm; }
+  .flux { display: flex; align-items: stretch; gap: 2mm; margin: 2mm 0 3mm 0; }
+  .flux .b { flex: 1; padding: 3mm; text-align: center; color: white; font-weight: bold; font-size: 9.5pt; }
+  .flux .fl { align-self: center; color: #8A96A3; font-size: 14pt; }
+  .regle { display: flex; gap: 3mm; margin-bottom: 2.5mm; }
+  .regle .n { flex: 0 0 8mm; height: 8mm; border-radius: 4mm; background: #1B3A5C; color: white; font-weight: bold; text-align: center; line-height: 8mm; }
+  .faq dt { font-weight: bold; color: #1B3A5C; margin-top: 1.8mm; }
+  .faq dd { margin: 0.5mm 0 0 0; }
+  .petit { font-size: 8.5pt; color: #5F6B76; }
+  ul { margin: 1mm 0 2mm 0; padding-left: 5mm; }
+  li { margin-bottom: 1mm; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="bandeau">
+    <h1>Anonymizator</h1>
+    <p class="sous">Replaces the names in your documents with tags before you put them into an AI, then puts the real names back into the answer.<br>
+    <b>The program uses no AI</b>, neither to detect nor to anonymise: rules only, offline. Everything happens on your computer; it sends nothing, anywhere.</p>
+  </div>
+
+  <h2>Installation: three steps, no setup</h2>
+  <div class="etapes">
+    <div class="etape"><div class="num">1</div><div class="titre">Unzip the file</div>
+      <p>Right-click <span class="cle">Anonymizator_2026.10.1.zip</span>, then "Extract All…".</p>
+      <p>Choose a folder of your own, for instance <b>Documents</b>. Avoid "Program Files" and read-only USB sticks: the program must be able to write next to itself.</p></div>
+    <div class="etape"><div class="num">2</div><div class="titre">Double-click Anonymizator.exe</div>
+      <p>The first start takes a few seconds.</p>
+      <p>If Windows shows "Windows protected your PC": click <b>More info</b>, then <b>Run anyway</b>. This message appears for any program without a paid code-signing certificate; it does not mean the program is dangerous.</p></div>
+    <div class="etape"><div class="num">3</div><div class="titre">Ready</div>
+      <p>At the first start, the program creates a <span class="cle">Data</span> folder in its own folder: your table <span class="cle">Correspondences.xlsx</span>, the <span class="cle">Logs</span> folder and a fictional document to practise on.</p>
+      <p>There is nothing else to do.</p></div>
+  </div>
+
+  <div class="encadre">
+    <div class="t">What the folder contains after the first start</div>
+    <table>
+      <tr><th style="width:38%">File or folder</th><th>Purpose</th></tr>
+      <tr><td><b>Anonymizator.exe</b></td><td>The program. The only file to double-click.</td></tr>
+      <tr><td>User guide.pdf</td><td>This document. Also opens from the program's "Help" tab.</td></tr>
+      <tr><td><b>Data\Correspondences.xlsx</b></td><td>Your table: which real name becomes which tag. An ordinary Excel file you can fill in yourself (page 5). <b>Confidential</b>: it is never sent.</td></tr>
+      <tr><td>Data\Logs\</td><td>One small file per anonymised document. It is what puts the real names back exactly.</td></tr>
+      <tr><td>Data\Examples\</td><td>A fictional document matching the "Example" matter of the table. For practice.</td></tr>
+      <tr><td>Data\config.json, detection_config.json</td><td>Settings. You never need to open them.</td></tr>
+      <tr><td>Tesseract\</td><td>Reads scanned PDFs. Free software shipped with the program. Leave it alone.</td></tr>
+      <tr><td>Technical documentation\</td><td>Free software licence (AGPL v3, summed up on one page in LICENSE.txt), third-party components, file checksums.</td></tr>
+      <tr><td>Source code\</td><td>The program's code, included as the licence requires. You do not need to open it to use the program.</td></tr>
+    </table>
+    <p class="petit">To back up: copy the <b>Data</b> folder. To move to another computer: copy the whole folder.</p>
+  </div>
+</section>
+
+<section class="page">
+  <h2>Try it in two minutes</h2>
+  <ul>
+    <li>At the top of the window, <b>Choose…</b> button: pick the document in the <span class="cle">Data\Examples</span> folder. Table "My correspondences", Matter "Example".</li>
+    <li>Tab <b>2. Anonymise</b>, blue button. A file <span class="cle">…_ANONYMISED.docx</span> appears next to the original: open it, the names have become tags.</li>
+    <li>Tab <b>3. Check</b>, red button: the program confirms that no name remains unmasked.</li>
+    <li>Tab <b>4. Restore</b>, green button, on the <span class="cle">…_ANONYMISED.docx</span> file: the real names come back in a file <span class="cle">…_RESTORED.docx</span>.</li>
+  </ul>
+
+  <h2 style="margin-top:4mm">The principle</h2>
+  <p>Your table says, for instance: "Horizon Digital Ltd" becomes <span class="cle">[CLM1]</span>, and "12 Lilac Street, Lille 59000" becomes <span class="cle">[CLM1_ADDRESS]</span>. The program makes the replacements. You give the anonymised document to the AI. When the answer comes back, the program puts the real names back.</p>
+  <p>The tags make sense without the table: the AI sees that <span class="cle">[CLM1_ADDRESS]</span> is the address of <span class="cle">[CLM1]</span>, and works normally, without ever knowing the name.</p>
+  <p><b>The program never modifies your document.</b> At each anonymisation or restoration it creates a new file next to it, whose name says its state: <span class="cle">…_ANONYMISED.docx</span> or <span class="cle">…_RESTORED.docx</span>. The original stays untouched. Working files that quote the real names (detection workbook, check report) go into a <span class="cle">_Private</span> subfolder next to the document: never attach it, and never zip it with the matter folder.</p>
+  <p><b>With the AI, the work is done on the tagged document.</b> You upload the <span class="cle">…_ANONYMISED.docx</span> file, the AI reasons and writes with the tags; you save its answer as a Word document, and the program restores it the "without the log" way: the tags become the real names again.</p>
+  <div class="encadre">
+    <div class="t">The key point: one sheet per matter, not per document</div>
+    <p><b>Anonymisation is not prepared document by document: it is prepared once for the whole matter.</b> A matter's sheet is the list of that matter's names (parties, directors, lawyers, addresses, trademarks, numbers) and their tags. Once filled in and completed, it serves <b>every</b> document of the matter, past and future: pleadings, writ, letters, contracts, exhibits, AI answers. To anonymise a new document, you pick it, you pick the sheet, you click: nothing else. <b>No need to run detection again.</b></p>
+    <p>Detection is only an aid to <b>fill</b> the sheet at the start, then to <b>enrich</b> it: the list of tags and data merely has to be completed as the matter goes on. A new name in a later document? One more row in the sheet, by hand in Excel, or through a detection on that document, which only adds what is missing. The further the matter goes, the more complete the sheet, and the less you have to do.</p>
+    <p>This is also what makes working with the AI reliable: the same company is <span class="cle">[DEF1]</span> in the writ, in the pleadings and in the AI's answer. The AI follows the matter from one document to the next without ever seeing a name, and any document of the matter is restored with the same sheet.</p>
+  </div>
+
+
+  <div class="flux">
+    <div class="b" style="background:#2A6F77">1. Prepare the table</div><div class="fl">›</div>
+    <div class="b" style="background:#1B3A5C">2. Anonymise</div><div class="fl">›</div>
+    <div class="b" style="background:#B23B3B">3. Check</div><div class="fl">›</div>
+    <div class="b" style="background:#8A96A3">You put it into the AI</div><div class="fl">›</div>
+    <div class="b" style="background:#2E7D4F">4. Restore</div>
+  </div>
+
+  <p>At the top of the window you choose <b>the document</b>, <b>the table</b> and <b>the matter</b>. A matter is a sheet of the table: a case, a contract, an audit. The four tabs of the program work on what you chose at the top.</p>
+
+</section>
+
+<section class="page">
+  <h2>Two ways to prepare a matter</h2>
+
+    <p><b>The quick path</b>, to hand documents to an AI fast and get a summary: Detect, then Inject, then Anonymise. You need to know nothing about the matter. What the program recognises with certainty is sorted by party ([DEF1], [DEF1_ADDRESS]). The rest gets a neutral tag by its nature ([COMPANY5], [ADDRESS3], [PHONE2]). Everything is masked.</p>
+    <p><b>The precise path</b>, for pleadings or a matter where who is who matters: before injecting, open the workbook (Step 2). On each row to refine, pick the Party, then the Role. Known parties are shown with their name. "new party" creates the next one, numbered by itself.</p>
+    <p><b>Attaching later.</b> You find out in another document who [ADDRESS3] belongs to? In the matter sheet, change the Party of that row. The Tag cell turns orange: the row will take [DEF1_ADDRESS] at the next use. Documents already anonymised with [ADDRESS3] can still be restored, even without the log.</p>
+    <p><b>Four rules to remember:</b> same number = same party; "new party" gives the next number by itself, without limit; red = two different identities under the same tag; a tag already used is never lost, restoration always recognises it.</p>
+  
+</section>
+
+
+<section class="page">
+  <div class="etapes">
+    <div class="etape teal"><div class="num">1</div><div class="titre">Prepare the table</div>
+      <p>The program reads the document (Word or PDF, even scanned) and spots names, addresses, company numbers, lawyers, trademarks, case numbers, IBANs, French social security numbers and dates of birth. It sorts them by party in a workbook <span class="cle">_Detection_….xlsx</span> created in the <span class="cle">_Private</span> subfolder, next to the document.</p>
+      <p><b>Step 1 · Detect</b>: the workbook is created. What the program recognises with certainty is sorted by party (<span class="cle">[DEF1]</span>, <span class="cle">[DEF1_ADDRESS]</span>); the rest gets a neutral tag by its nature (<span class="cle">[COMPANY5]</span>, <span class="cle">[ADDRESS3]</span>, <span class="cle">[PHONE2]</span>), numbered by itself. Everything is set to YES, except repeated unrecognised words and terms read by OCR.</p>
+      <p><b>Step 2 · Review and validate in Excel</b> (optional): the button opens the workbook. <b>Quick path</b>: nothing to do, go to step 3. <b>Precise path</b> (to say who is who): on a row, pick the <b>Party</b> (who?) then the <b>Role</b> (what?) from two short lists; the tag fills itself in, with its real number. Known parties are shown with their name; "new party" ("COMPANY+") creates the next one, numbered by itself. A tag in <b>red</b> flags two different identities under the same tag. Then <b>save</b> (Ctrl+S) and <b>close</b> the workbook: the saved version is what counts.</p>
+      <p><b>Step 3 · Inject</b>: the kept rows go into the matter sheet. Workbook still open in Excel? The program tells you and writes nothing. Injecting rewrites the sheet: columns H to J are reserved for the program (hidden); what you add in column K onwards, comments and filters is not kept.</p>
+      <p>This step is optional: you can also fill the table yourself in Excel (page 5).</p></div>
+    <div class="etape"><div class="num">2</div><div class="titre">Anonymise</div>
+      <p>Creates <span class="cle">…_ANONYMISED.docx</span> next to the original, and a log in <span class="cle">Logs</span>.</p>
+      <p>Replaces everywhere: text, tables, headers and footers, footnotes, comments, text boxes, file properties (author, company). The authors of comments and tracked changes become “Author 1”, “Author 2”… and get their names back on restoration. Bold, italic and layout are preserved.</p>
+      <p>If no term of the chosen matter appears in the document, the program refuses: you probably picked the wrong matter.</p></div>
+  </div>
+  <div class="etapes">
+    <div class="etape rouge"><div class="num">3</div><div class="titre">Check</div>
+      <p>A second verification, independent of the first. The program re-reads the whole file, including what is not visible on screen, plus the file name and folder path.</p>
+      <p>On an anonymised document it looks for a real name left unmasked. On a restored document it looks for a forgotten tag. It also reports tags miscopied by the AI ([Def1], DEF 1…), and raises an alert on a tag of the table that would reveal the name it masks ([AGICE] for "AGICE EDITIQUE").</p>
+      <p>Finally it re-reads the document the way the pre-detection does: IBAN, social security no., e-mail or phone missing from the table = <b>alert</b>; a name (“Mr Smith”) is only listed <b>to check</b>. It writes a report <span class="cle">_Check_….txt</span> in the <span class="cle">_Private</span> subfolder.</p></div>
+    <div class="etape vert"><div class="num">4</div><div class="titre">Restore</div>
+      <p>Puts the real names back into a tagged document.</p>
+      <p><b>With the log</b>: to get back <b>your own document</b> anonymised on this computer (same file, same paragraphs). Exact, and no risk of mixing up two matters.</p>
+      <p><b>Without the log</b>: for the <b>AI's answer</b> saved as a Word document (another name, other paragraphs: the log does not describe it), or a document anonymised on another computer or by a colleague. The program uses the table of the matter chosen at the top. Each name comes back in its first listed spelling: proofread.</p>
+      <p>A tag miscopied by the AI is never restored silently: it is left as it is and listed, to be fixed by hand.</p>
+      <p>Creates <span class="cle">…_RESTORED.docx</span> next to the document.</p></div>
+  </div>
+  <div class="encadre alerte">
+    <div class="t">A restored document contains the real names</div>
+    <p>It can go to the client or to a colleague. It <b>never</b> goes into an AI. The program reminds you at every restoration.</p>
+  </div>
+</section>
+
+<section class="page">
+  <h2>The correspondence table</h2>
+  <p><span class="cle">Correspondences.xlsx</span> is an ordinary Excel workbook, with <b>one sheet per matter</b>. You can fill it in two ways, and mix them: with pre-detection (tab 1 of the program), or <b>by hand in Excel</b>.</p>
+
+  <table>
+    <tr><th>Original term</th><th>Tag</th><th>Role</th><th>Party</th><th>Active?</th></tr>
+    <tr class="groupe"><td colspan="5">CLM1</td></tr>
+    <tr><td>Horizon Digital Ltd</td><td>[CLM1]</td><td>Identity</td><td>CLM1</td><td>YES</td></tr>
+    <tr><td>Horizon Digital / HORIZON DIGITAL</td><td>[CLM1]</td><td>Identity</td><td>CLM1</td><td>YES</td></tr>
+    <tr><td>12 Lilac Street, Lille 59000</td><td>[CLM1_ADDRESS]</td><td>Address</td><td>CLM1</td><td>YES</td></tr>
+    <tr><td>Ms Claire Vasseur</td><td>[CLM1_DIRECTOR]</td><td>Director</td><td>CLM1</td><td>YES</td></tr>
+    <tr><td>Paul Lemaire</td><td>[CLM1_LAWYER]</td><td>Lawyer</td><td>CLM1</td><td>YES</td></tr>
+    <tr class="groupe"><td colspan="5">DEF1</td></tr>
+    <tr><td>Blue Marine Workshop Ltd</td><td>[DEF1]</td><td>Identity</td><td>DEF1</td><td>YES</td></tr>
+    <tr class="groupe"><td colspan="5">SHARED ITEMS</td></tr>
+    <tr><td>LUMIVRAC</td><td>[TRADEMARK1]</td><td>Trademark</td><td>SHARED</td><td>YES</td></tr>
+    <tr><td>24/01234</td><td>[CASE_NO1]</td><td>Case number</td><td>SHARED</td><td>YES</td></tr>
+  </table>
+  <p class="petit">Extract of the "Example" sheet delivered with the program. All data is invented.</p>
+
+  <div class="encadre">
+    <div class="t">Filling or correcting the table by hand</div>
+    <ul>
+      <li><b>Create the matter</b>: in the program, <b>New matter…</b> button. The sheet is created in the right format. Or, to start from every tag already written (claimant, defendant, individuals and legal entities, companies, bailiff, expert, shared items): in Excel, right-click the <b>Full template</b> sheet tab › Move or Copy › Create a copy, then rename it; only the Term column is left to fill, empty rows are ignored.</li>
+      <li><b>Open the table</b>: <b>Open in Excel</b> button, or double-click <span class="cle">Correspondences.xlsx</span>.</li>
+      <li><b>Add a row</b>: forty rows are ready below the table. The real name in column A, then the <b>role</b> and the <b>party</b> from the drop-down lists: the tag fills itself in, number included (<span class="cle">[CLM1_SOFTWARE]</span>, then <span class="cle">[CLM1_SOFTWARE2]</span>), and the row takes its party's colour.</li>
+      <li><b>A category of your own speciality</b>: a role missing from the menu can be typed freely and the tag is built from it ("Standard clause" and PROVIDER give <span class="cle">[PROVIDER_STANDARD_CLAUSE]</span>). A bailiff, an expert, an employee: party BAILIFF1, EXPERT1, EMPLOYEE1 with role Identity.</li>
+      <li><b>Save</b> in Excel (Ctrl+S). Nothing else is needed: the program re-reads the table every time you click a button. No need to restart it. If a new sheet does not show in the "Matter" list, click <b>Refresh</b>.</li>
+      <li><b>Close Excel</b> only when the program must write into the table itself (New matter, Inject): Excel locks the file while it is open. To anonymise, check or restore, Excel can stay open.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="page">
+  <h2>Filling the table well</h2>
+  <div class="deux">
+    <div>
+      <h3>The columns</h3>
+      <p><b>Original term</b>: the real name, written exactly as in your documents. For several spellings of the same name, two options: one row per spelling with the same tag, or on one row separated by "&nbsp;/&nbsp;" (space, slash, space).</p>
+      <p><b>Tag</b>: what replaces the name, in square brackets, in capitals: the party, then the role. It is computed from the Role and Party columns. To attach a row to another party, change its Party (not its tag): the tag follows at the next use (orange cell meanwhile), and the former one is still recognised to restore documents already anonymised.</p>
+      <p><b>Role</b>: what the term is to the party: Identity, Address, Company number, Director, Lawyer, E-mail, IBAN, Social security no., Date of birth, Trademark, Case number…</p>
+      <p><b>Party</b>: who the term relates to, as a short numbered code: CLM1, CLM2 (claimants), DEF1 (defendant), APP1, RESP1, INTERV1 in litigation; CLI (our client), OPP (opposing party) in a letter; CUSTOMER, PROVIDER in a contract; COMPANY1, INDIVIDUAL1, LEGAL_ENTITY1 for the rest; SHARED for items that belong to no party (a disputed trademark, a case number, an address whose owner is unknown). What belongs to a party hangs off it: [DEF1_ADDRESS], [DEF1_LAWYER]. Same number = same party. Each party has its colour in the sheet: navy for the first, burgundy for the second, grey for shared items.</p>
+      <p><b>Active?</b>: YES (or empty): the term is replaced. NO: the row is kept for the record, without effect.</p>
+    </div>
+    <div>
+      <h3>Three habits that prevent problems</h3>
+      <div class="regle"><div class="n">1</div><div>One real name = one tag for the whole matter. The long form ("Horizon Digital Ltd") on the first row, the short forms next, with the same tag.</div></div>
+      <div class="regle"><div class="n">2</div><div>Remember the spellings people forget: the name in capitals, without "Ltd", the surname alone, the e-mail address, the website. Anything not in the table stays visible.</div></div>
+      <div class="regle"><div class="n">3</div><div>The table is your key. It is never sent with an anonymised document, and never goes into an AI.</div></div>
+      <h3>Drafting placeholders</h3>
+      <p class="petit">[DATE], [AMOUNT], [TO COMPLETE]… look like tags but are not: only what is declared in the table is a tag. Placeholders go through anonymisation and restoration untouched.</p>
+      <h3>A note on pre-detection</h3>
+      <p class="petit">Pre-detection was built for French legal documents. On English documents it recognises parties introduced by BETWEEN / AND, CLAIMANT / DEFENDANT, company names ending in Ltd, LLC, Inc, PLC, titles Mr / Ms / Mrs / Dr, e-mails, websites, case numbers and quoted trademarks. It will miss some people and roles: review its workbook carefully, or fill the table in by hand. Anonymisation, check and restoration work in any language.</p>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <h2>Golden rules and frequently asked questions</h2>
+
+  <div class="encadre">
+    <div class="t">The three rules</div>
+    <div class="regle"><div class="n">1</div><div><b>Always check</b> (tab 3) before putting a document into an AI.</div></div>
+    <div class="regle"><div class="n">2</div><div><b>A restored document contains the real names</b>: never into an AI.</div></div>
+    <div class="regle"><div class="n">3</div><div><b>Proofread the produced document.</b> The program only replaces what is in the table. The check flags likely personal data outside it, but cannot see everything.</div></div>
+  </div>
+
+  <dl class="faq">
+    <dt>I edited the table in Excel: do I need to restart the program?</dt>
+    <dd>No. Save in Excel: the program re-reads the table at every click. Click <b>Refresh</b> if a new sheet does not show in the "Matter" list.</dd>
+
+    <dt>The program says "Matter unrelated to this document".</dt>
+    <dd>No term of the chosen sheet appears in the document. Check the matter selected at the top of the window. The message tells you which sheet would match.</dd>
+
+    <dt>Restoration without the log refuses to write.</dt>
+    <dd>A tag of the document is missing from the chosen sheet. The message names it. Add the row to the table (or choose the right matter), save, try again. The program would rather refuse than mix up two matters.</dd>
+
+    <dt>"The correspondence workbook is open (in Excel?)".</dt>
+    <dd>The program wanted to write into the table and Excel locks it. Close Excel, try again. Nothing was changed. The same applies to the detection workbook at step 3: save it, close it, then Inject.</dd>
+
+    <dt>I have several companies, people or lawyers: how many numbers?</dt>
+    <dd>As many as needed. "new party" gives the next number every time (COMPANY2, COMPANY3… COMPANY15). Several lawyers or addresses of one party are numbered by themselves: [DEF1_LAWYER], [DEF1_LAWYER2]… Numbers never go down: a gap does no harm.</dd>
+
+    <dt>A PDF: what can I do with it?</dt>
+    <dd>Pre-detection (tab 1) reads PDFs, native or scanned, to fill the table. Anonymisation, check and restoration work on Word documents (.docx). To anonymise a PDF, convert it to Word first.</dd>
+
+    <dt>The scanned PDF is read, but detection proposes odd terms.</dt>
+    <dd>The text of a scan is rebuilt by character recognition, so it is approximate (an "l" read as an "I", a lost accent). That is why no row coming from a scan is proposed as YES: check every term against the real document.</dd>
+
+    <dt>I work on two computers, or with a colleague.</dt>
+    <dd>Copy the whole program folder to the other computer. A document anonymised on computer A is restored on computer B with "Restore without the log", provided the table on B contains the same rows. Simplest: use the same Correspondences.xlsx file on both sides.</dd>
+
+    <dt>Can I have several tables?</dt>
+    <dd>Yes, <b>Add a table…</b> button. Each table has its own sheets. Useful to separate, for instance, the firm's matters from personal ones.</dd>
+
+    <dt>Does the program work with an AI?</dt>
+    <dd>No, at no stage. Detection, anonymisation, check and restoration rely on rules (titles, company forms, addresses, numbers…) and on your table. The AI is only where the anonymised document goes, and you are the one who puts it there.</dd>
+
+    <dt>Are documents sent anywhere?</dt>
+    <dd>No. The program does not use the internet. Documents, table and logs stay on your computer.</dd>
+
+    <dt>Detection missed a name.</dt>
+    <dd>Add the row yourself in the matter sheet, under the right party, with a tag built on the same model (for instance [DEF1_SIGNATORY]). Save: it is taken into account.</dd>
+  </dl>
+
+  <p class="petit" style="margin-top:6mm">Anonymizator is an aid: what goes into an AI tool remains the responsibility of the lawyer who puts it there. Program developed by Aurélien Bougeard, avocat (French lawyer). Free software under the AGPL v3 licence, source code included. Tesseract OCR (Tesseract folder) is free software under the Apache 2.0 licence; the licence is included.</p>
+</section>
+
+</body>
+</html>

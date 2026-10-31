@@ -1,0 +1,712 @@
+{
+  "_lisez_moi": "Reglages de la pre-detection. Ce fichier se modifie avec le Bloc-notes. Les mots s'ecrivent en MAJUSCULES, avec ou sans accents (les accents sont ignores). Apres modification, relancez Detection.bat.",
+  "_ocr": "Lecture des PDF scannes. « tesseract » est le chemin du programme Tesseract, « tessdata » le dossier contenant fra.traineddata. Laissez vides pour que le programme les cherche tout seul aux emplacements habituels.",
+  "ocr": {
+    "tesseract": "",
+    "tessdata": "",
+    "langue": "fra",
+    "resolution": 300,
+    "seuil_page": 20
+  },
+  "_cabinet": "Noms des avocats du cabinet, SANS « Maitre », tels qu'ils figurent dans vos courriers (exemple : \"Jean DUPONT\"). Sert uniquement a savoir si une mise en demeure a ete EMISE par le cabinet ou RECUE. Si la liste est vide, le programme vous pose la question.",
+  "cabinet": {
+    "avocats": []
+  },
+  "_attributs": "Les roles possibles d'un terme au sein d'une partie. « libelle » est ce qui s'affiche dans le tableur, « suffixe » ce qui s'ajoute au code de la partie pour former la balise : partie DEFENDEUR1 + Adresse = [DEFENDEUR1_ADRESSE]. Le role Identite (suffixe vide) designe la partie elle-meme : [DEFENDEUR1]. L'ordre ci-dessous est l'ordre des lignes dans l'onglet.",
+  "attributs": [
+    {
+      "libelle": "Identité",
+      "suffixe": ""
+    },
+    {
+      "libelle": "Adresse",
+      "suffixe": "ADRESSE"
+    },
+    {
+      "libelle": "SIRET",
+      "suffixe": "SIRET"
+    },
+    {
+      "libelle": "Dirigeant",
+      "suffixe": "DIRIGEANT"
+    },
+    {
+      "libelle": "Adresse dirigeant",
+      "suffixe": "DIRIGEANT_ADRESSE"
+    },
+    {
+      "libelle": "Signataire",
+      "suffixe": "SIGNATAIRE"
+    },
+    {
+      "libelle": "Personne liée",
+      "suffixe": "PERSONNE"
+    },
+    {
+      "libelle": "Salarié",
+      "suffixe": "SALARIE"
+    },
+    {
+      "libelle": "Enseigne",
+      "suffixe": "ENSEIGNE"
+    },
+    {
+      "libelle": "E-mail",
+      "suffixe": "EMAIL"
+    },
+    {
+      "libelle": "Téléphone",
+      "suffixe": "TELEPHONE"
+    },
+    {
+      "libelle": "IBAN",
+      "suffixe": "IBAN"
+    },
+    {
+      "libelle": "NIR",
+      "suffixe": "NIR"
+    },
+    {
+      "libelle": "Date de naissance",
+      "suffixe": "DATE_NAISSANCE"
+    },
+    {
+      "libelle": "Site web",
+      "suffixe": "SITE"
+    },
+    {
+      "libelle": "Avocat",
+      "suffixe": "AVOCAT"
+    },
+    {
+      "libelle": "Cabinet d'avocat",
+      "suffixe": "AVOCAT_CABINET"
+    },
+    {
+      "libelle": "Adresse avocat",
+      "suffixe": "AVOCAT_ADRESSE"
+    },
+    {
+      "libelle": "E-mail avocat",
+      "suffixe": "AVOCAT_EMAIL"
+    },
+    {
+      "libelle": "Téléphone avocat",
+      "suffixe": "AVOCAT_TELEPHONE"
+    },
+    {
+      "libelle": "Site web avocat",
+      "suffixe": "AVOCAT_SITE"
+    },
+    {
+      "libelle": "Avocat postulant",
+      "suffixe": "AVOCAT_POSTULANT"
+    },
+    {
+      "libelle": "Adresse avocat postulant",
+      "suffixe": "AVOCAT_POSTULANT_ADRESSE"
+    },
+    {
+      "libelle": "Étude",
+      "suffixe": "ETUDE"
+    },
+    {
+      "libelle": "Marque",
+      "suffixe": "MARQUE"
+    },
+    {
+      "libelle": "Brevet",
+      "suffixe": "BREVET"
+    },
+    {
+      "libelle": "Dessin et modèle",
+      "suffixe": "DESSIN_MODELE"
+    },
+    {
+      "libelle": "Dépôt INPI",
+      "suffixe": "DEPOT_INPI"
+    },
+    {
+      "libelle": "Dépôt européen",
+      "suffixe": "DEPOT_EUROPEEN"
+    },
+    {
+      "libelle": "Logiciel",
+      "suffixe": "LOGICIEL"
+    },
+    {
+      "libelle": "Produit",
+      "suffixe": "PRODUIT"
+    },
+    {
+      "libelle": "Référence RG",
+      "suffixe": "RG"
+    },
+    {
+      "libelle": "Montant",
+      "suffixe": "MONTANT"
+    },
+    {
+      "libelle": "Pièce",
+      "suffixe": "PIECE"
+    },
+    {
+      "libelle": "Version logiciel",
+      "suffixe": "VERSION_LOGICIEL"
+    },
+    {
+      "libelle": "Empreinte fichier",
+      "suffixe": "EMPREINTE"
+    },
+    {
+      "libelle": "URL dépôt",
+      "suffixe": "URL_DEPOT"
+    },
+    {
+      "libelle": "Clé de licence",
+      "suffixe": "CLE_LICENCE"
+    },
+    {
+      "libelle": "Donnée",
+      "suffixe": "DONNEE"
+    }
+  ],
+  "_types_detection": "Ce que le detecteur reconnait (a gauche) et le role qu'il propose (a droite). Un libelle a droite doit figurer dans la liste des attributs ci-dessus.",
+  "types_detection_vers_attribut": {
+    "personne_physique": "Identité",
+    "personne_morale": "Identité",
+    "representant_legal": "Dirigeant",
+    "adresse": "Adresse",
+    "siret": "SIRET",
+    "siren": "SIRET",
+    "rcs": "SIRET",
+    "email": "E-mail",
+    "telephone": "Téléphone",
+    "iban": "IBAN",
+    "nir": "NIR",
+    "date_naissance": "Date de naissance",
+    "site_web": "Site web",
+    "avocat": "Avocat",
+    "commissaire_justice": "Identité",
+    "enseigne": "Enseigne",
+    "marque": "Marque",
+    "brevet": "Brevet",
+    "dessin_modele": "Dessin et modèle",
+    "depot_inpi": "Dépôt INPI",
+    "rg": "Référence RG",
+    "outil": "Identité",
+    "expert": "Identité",
+    "produit": "Produit",
+    "candidat": "Identité"
+  },
+  "libelles_lisibles": {
+    "personne_physique": "Personne physique",
+    "representant_legal": "Représentant légal",
+    "personne_morale": "Personne morale",
+    "adresse": "Adresse",
+    "siret": "SIRET",
+    "siren": "SIREN",
+    "rcs": "RCS",
+    "email": "E-mail",
+    "telephone": "Téléphone",
+    "iban": "IBAN",
+    "nir": "NIR (n° de sécurité sociale)",
+    "date_naissance": "Date de naissance",
+    "site_web": "Site web",
+    "avocat": "Avocat",
+    "commissaire_justice": "Commissaire de justice",
+    "rg": "Référence RG",
+    "marque": "Marque",
+    "brevet": "Brevet",
+    "dessin_modele": "Dessin et modèle",
+    "depot_inpi": "Dépôt INPI",
+    "enseigne": "Enseigne",
+    "outil": "Outil / logiciel",
+    "expert": "Expert",
+    "produit": "Produit / gamme",
+    "candidat": "Non reconnu (à classer)"
+  },
+  "_roles_communs": "Acteurs qui existent quel que soit le type de document. « avant » : mots qui, places juste avant le nom d'une personne, designent ce role.",
+  "roles_communs": [
+    {
+      "code": "COMMISSAIRE",
+      "libelle": "Commissaire de justice",
+      "pluriel": true,
+      "avant": []
+    },
+    {
+      "code": "EXPERT",
+      "libelle": "Expert",
+      "pluriel": true,
+      "avant": [
+        "EXPERT",
+        "EXPERTE",
+        "EXPERT JUDICIAIRE",
+        "SAPITEUR"
+      ]
+    },
+    {
+      "code": "MAGISTRAT",
+      "libelle": "Magistrat",
+      "pluriel": true,
+      "avant": [
+        "PRESIDENT :",
+        "PRESIDENTE :",
+        "JUGE :",
+        "CONSEILLER :",
+        "CONSEILLERE :",
+        "MAGISTRAT",
+        "JUGE",
+        "VICE-PRESIDENT",
+        "VICE-PRESIDENTE"
+      ]
+    },
+    {
+      "code": "GREFFIER",
+      "libelle": "Greffier",
+      "pluriel": true,
+      "avant": [
+        "GREFFIER",
+        "GREFFIERE"
+      ]
+    },
+    {
+      "code": "TIERS",
+      "libelle": "Tiers",
+      "pluriel": true,
+      "avant": []
+    },
+    {
+      "code": "SALARIE",
+      "libelle": "Salarié",
+      "pluriel": true,
+      "avant": []
+    }
+  ],
+  "_parties_menu": "Parties proposees dans les menus (Partie et Balise) sans etre produites par la detection : l'utilisateur les choisit lui-meme. « numeros » : combien de numeros sont proposes d'emblee (SOCIETE1 a SOCIETE6). « personne_physique » : true = menu de roles allege (pas de SIRET, dirigeant, enseigne, site web). La cle « * » vaut pour tous les types de documents ; les autres cles sont des types de documents (contentieux, contrat...). Ajouter une ligne ici suffit, sans toucher au programme.",
+  "parties_menu": {
+    "*": [
+      {
+        "code": "SOCIETE",
+        "libelle": "Société",
+        "numeros": 6
+      },
+      {
+        "code": "PERSONNE_PHYSIQUE",
+        "libelle": "Personne physique",
+        "numeros": 4,
+        "personne_physique": true
+      },
+      {
+        "code": "PERSONNE_MORALE",
+        "libelle": "Personne morale",
+        "numeros": 4
+      }
+    ]
+  },
+  "_types_documents": "Un bloc par type de document. « signaux » : mots qui font reconnaitre le type (le plus frequent l'emporte). « fin_entete » : titres, en debut de ligne, qui marquent la fin de la presentation des parties. « separateurs » : mots, en debut de ligne, qui ouvrent le bloc d'une partie sans dire son role (POUR, ENTRE, ET...). Pour chaque role : « code » (forme de la balise), « pluriel » (true = numerote DEMANDEUR1, DEMANDEUR2 ; false = PRESTATAIRE, puis PRESTATAIRE2 s'il y en a un second), « qualites » (mots qui, dans la presentation, designent ce role), « ouvreurs » (mots, en debut de ligne, qui ouvrent le bloc de ce role).",
+  "_definitions_roles_admis": "Termes definis d'un contrat (« ci-apres le X ») admis comme code de partie, EN PLUS des roles courants connus du programme (Prestataire, Client, Bailleur, Preneur, Licencie...). Tout autre terme defini (nom, sigle, marque : « ci-apres « AGICE » ») est ecarte : une balise ne doit jamais reprendre le nom qu'elle masque. Ajoutez ici vos roles de specialite, en majuscules.",
+  "definitions_roles_admis": [],
+  "_codes_courts": "Codes courts depuis le 15/10/2026 : DEM (demandeur), DEF (defendeur), APP (appelant), INTIME, INTERV (intervenant), CLI (notre client), ADV (partie adverse). La partie est numerotee et ce qui lui appartient s'y rattache : [DEF1], [DEF1_ADRESSE], [DEF1_DIRIGEANT]. Les onglets crees avant gardent leurs anciennes balises ([DEFENDEUR1]...).",
+  "types_documents": {
+    "contentieux": {
+      "libelle": "Contentieux (assignation, conclusions, jugement)",
+      "signaux": [
+        "ASSIGNATION",
+        "CONCLUSIONS",
+        "TRIBUNAL",
+        "COUR D'APPEL",
+        "PLAISE",
+        "PAR CES MOTIFS",
+        "A LA REQUETE DE",
+        "DEMANDERESSE",
+        "DEFENDERESSE",
+        "INTIMEE",
+        "APPELANTE",
+        "N° RG",
+        "JUGEMENT",
+        "ORDONNANCE"
+      ],
+      "fin_entete": [
+        "FAITS",
+        "EN FAIT",
+        "RAPPEL DES FAITS",
+        "EXPOSE",
+        "EXPOSE DU LITIGE",
+        "PLAISE",
+        "PAR CES MOTIFS",
+        "DISCUSSION",
+        "MOTIFS",
+        "OBJET DE LA DEMANDE",
+        "D'AVOIR A COMPARAITRE",
+        "SUR QUOI"
+      ],
+      "separateurs": [
+        "POUR",
+        "ENTRE",
+        "ET"
+      ],
+      "roles": [
+        {
+          "code": "DEM",
+          "pluriel": true,
+          "qualites": [
+            "DEMANDEUR",
+            "DEMANDEURS",
+            "DEMANDERESSE",
+            "DEMANDERESSES",
+            "REQUERANT",
+            "REQUERANTS",
+            "REQUERANTE",
+            "REQUERANTES"
+          ],
+          "ouvreurs": [
+            "A LA REQUETE DE"
+          ]
+        },
+        {
+          "code": "DEF",
+          "pluriel": true,
+          "qualites": [
+            "DEFENDEUR",
+            "DEFENDEURS",
+            "DEFENDERESSE",
+            "DEFENDERESSES"
+          ],
+          "ouvreurs": [
+            "CONTRE",
+            "DONNE ASSIGNATION A",
+            "ASSIGNE",
+            "ASSIGNEE",
+            "ASSIGNES",
+            "ASSIGNEES"
+          ]
+        },
+        {
+          "code": "APP",
+          "pluriel": true,
+          "qualites": [
+            "APPELANT",
+            "APPELANTS",
+            "APPELANTE",
+            "APPELANTES"
+          ],
+          "ouvreurs": []
+        },
+        {
+          "code": "INTIME",
+          "pluriel": true,
+          "qualites": [
+            "INTIME",
+            "INTIMES",
+            "INTIMEE",
+            "INTIMEES"
+          ],
+          "ouvreurs": []
+        },
+        {
+          "code": "INTERV",
+          "pluriel": true,
+          "qualites": [
+            "INTERVENANT",
+            "INTERVENANTE",
+            "INTERVENANTS",
+            "INTERVENANTES",
+            "INTERVENANT VOLONTAIRE",
+            "INTERVENANTE VOLONTAIRE",
+            "INTERVENANT FORCE",
+            "INTERVENANTE FORCEE"
+          ],
+          "ouvreurs": []
+        }
+      ]
+    },
+    "contrat": {
+      "libelle": "Contrat (contrat, CGV, CGU, DPA, licence, NDA)",
+      "signaux": [
+        "ENTRE LES SOUSSIGNES",
+        "CI-APRES DENOMME",
+        "CI-APRES DENOMMEE",
+        "CI-APRES",
+        "IL A ETE CONVENU",
+        "CONDITIONS GENERALES",
+        "OBJET DU CONTRAT",
+        "DUREE DU CONTRAT",
+        "RESILIATION",
+        "ARTICLE 1",
+        "LES PARTIES",
+        "FAIT EN",
+        "EXEMPLAIRES"
+      ],
+      "fin_entete": [
+        "PREAMBULE",
+        "IL A ETE CONVENU",
+        "IL EST CONVENU",
+        "ETANT PREALABLEMENT EXPOSE",
+        "CECI EXPOSE",
+        "ARTICLE 1",
+        "ARTICLE PREMIER",
+        "1. OBJET",
+        "OBJET",
+        "DEFINITIONS"
+      ],
+      "separateurs": [
+        "ENTRE",
+        "ET",
+        "ENTRE LES SOUSSIGNES"
+      ],
+      "_roles": "En contrat, le role est lu dans le contrat lui-meme (« ci-apres « le Prestataire » » donne PRESTATAIRE). La liste ci-dessous ne sert que de repli, quand aucune definition n'est trouvee : « mots » sont cherches dans le bloc de la partie.",
+      "roles": [
+        {
+          "code": "PRESTATAIRE",
+          "pluriel": false,
+          "qualites": [],
+          "ouvreurs": [],
+          "mots": [
+            "PRESTATAIRE",
+            "FOURNISSEUR",
+            "EDITEUR",
+            "VENDEUR",
+            "CONCEDANT",
+            "CEDANT",
+            "SOUS-TRAITANT"
+          ]
+        },
+        {
+          "code": "CLIENT",
+          "pluriel": false,
+          "qualites": [],
+          "ouvreurs": [],
+          "mots": [
+            "CLIENT",
+            "CLIENTE",
+            "ACHETEUR",
+            "ABONNE",
+            "LICENCIE",
+            "CESSIONNAIRE",
+            "UTILISATEUR"
+          ]
+        }
+      ],
+      "definitions_ignorees": [
+        "CONTRAT",
+        "PARTIE",
+        "PARTIES",
+        "CONDITIONS",
+        "CONDITIONS GENERALES",
+        "SERVICE",
+        "SERVICES",
+        "SOLUTION",
+        "ACCORD",
+        "AVENANT",
+        "ANNEXE",
+        "ANNEXES",
+        "LOGICIEL",
+        "DONNEES",
+        "PRESTATIONS",
+        "PRESTATION",
+        "COMMANDE",
+        "BON DE COMMANDE",
+        "SITE",
+        "PLATEFORME",
+        "OFFRE",
+        "DOCUMENTATION",
+        "LIVRABLES",
+        "PRIX"
+      ]
+    },
+    "mise_en_demeure": {
+      "libelle": "Mise en demeure / courrier",
+      "signaux": [
+        "MISE EN DEMEURE",
+        "METS EN DEMEURE",
+        "METTONS EN DEMEURE",
+        "LETTRE RECOMMANDEE",
+        "LRAR",
+        "AVEC ACCUSE DE RECEPTION",
+        "A DEFAUT",
+        "OBJET :",
+        "MON CLIENT",
+        "MA CLIENTE",
+        "NOTRE CLIENT",
+        "NOTRE CLIENTE",
+        "CHER CONFRERE",
+        "CHERE CONSOEUR",
+        "JE VOUS PRIE",
+        "VEUILLEZ AGREER"
+      ],
+      "fin_entete": [
+        "OBJET",
+        "MADAME, MONSIEUR",
+        "MADAME,",
+        "MONSIEUR,",
+        "MESSIEURS,",
+        "MAITRE,",
+        "CHER CONFRERE",
+        "CHERE CONSOEUR",
+        "MON CHER CONFRERE",
+        "MA CHERE CONSOEUR"
+      ],
+      "separateurs": [],
+      "_roles": "Les roles sont vus depuis le cabinet : NOTRE_CLIENT reste notre client, que la lettre soit envoyee ou recue. « representation » : mots qui introduisent le client d'un avocat (« conseil de la societe X »).",
+      "roles": [
+        {
+          "code": "CLI",
+          "pluriel": false,
+          "qualites": [],
+          "ouvreurs": []
+        },
+        {
+          "code": "ADV",
+          "pluriel": false,
+          "qualites": [],
+          "ouvreurs": []
+        }
+      ],
+      "representation": [
+        "CONSEIL DE",
+        "CONSEILS DE",
+        "MON CLIENT",
+        "MA CLIENTE",
+        "MES CLIENTS",
+        "NOTRE CLIENT",
+        "NOTRE CLIENTE",
+        "NOS CLIENTS",
+        "POUR LE COMPTE DE",
+        "AU NOM ET POUR LE COMPTE DE",
+        "INTERVIENS POUR",
+        "INTERVENONS POUR",
+        "INTERETS DE"
+      ],
+      "representation_destinataire": [
+        "VOTRE CLIENT",
+        "VOTRE CLIENTE",
+        "VOS CLIENTS",
+        "VOTRE SOCIETE"
+      ]
+    },
+    "audit_rgpd": {
+      "libelle": "Audit RGPD",
+      "signaux": [
+        "AUDIT",
+        "RGPD",
+        "REGLEMENT GENERAL SUR LA PROTECTION",
+        "REGISTRE DES TRAITEMENTS",
+        "RESPONSABLE DE TRAITEMENT",
+        "RESPONSABLE DU TRAITEMENT",
+        "SOUS-TRAITANT",
+        "DONNEES A CARACTERE PERSONNEL",
+        "DPO",
+        "DELEGUE A LA PROTECTION",
+        "AIPD",
+        "CNIL",
+        "DUREE DE CONSERVATION",
+        "BASE LEGALE"
+      ],
+      "fin_entete": [],
+      "separateurs": [],
+      "roles": [
+        {
+          "code": "ORGANISME_AUDITE",
+          "pluriel": false,
+          "qualites": [],
+          "ouvreurs": [],
+          "pres": [
+            "SOCIETE AUDITEE",
+            "ORGANISME AUDITE",
+            "ENTITE AUDITEE",
+            "AUDIT DE LA SOCIETE",
+            "AUDIT DE",
+            "AUDITE",
+            "AUDITEE"
+          ]
+        },
+        {
+          "code": "SOUS_TRAITANT",
+          "pluriel": true,
+          "qualites": [],
+          "ouvreurs": [],
+          "pres": [
+            "SOUS-TRAITANT",
+            "SOUS TRAITANT",
+            "PRESTATAIRE",
+            "HEBERGEUR",
+            "EDITEUR",
+            "FOURNISSEUR"
+          ]
+        },
+        {
+          "code": "RESPONSABLE_TRAITEMENT",
+          "pluriel": true,
+          "qualites": [],
+          "ouvreurs": [],
+          "pres": [
+            "RESPONSABLE DE TRAITEMENT",
+            "RESPONSABLE DU TRAITEMENT",
+            "RESPONSABLES CONJOINTS",
+            "CO-RESPONSABLE",
+            "SOCIETE MERE",
+            "MAISON MERE"
+          ]
+        },
+        {
+          "code": "DPO",
+          "pluriel": false,
+          "qualites": [],
+          "ouvreurs": [],
+          "pres": [
+            "DPO",
+            "DELEGUE A LA PROTECTION DES DONNEES",
+            "DELEGUEE A LA PROTECTION DES DONNEES"
+          ]
+        },
+        {
+          "code": "REFERENT",
+          "pluriel": true,
+          "qualites": [],
+          "ouvreurs": [],
+          "pres": [
+            "REFERENT",
+            "REFERENTE",
+            "DSI",
+            "RESPONSABLE INFORMATIQUE",
+            "DIRECTEUR DES SYSTEMES",
+            "DIRECTRICE DES SYSTEMES",
+            "RESPONSABLE RGPD",
+            "RESPONSABLE CONFORMITE",
+            "INTERLOCUTEUR",
+            "INTERLOCUTRICE"
+          ]
+        },
+        {
+          "code": "OUTIL",
+          "pluriel": true,
+          "qualites": [],
+          "ouvreurs": []
+        }
+      ],
+      "definitions_organisme": [
+        "SOCIETE",
+        "ORGANISME",
+        "CLIENT",
+        "ENTREPRISE",
+        "ENTITE",
+        "GROUPE",
+        "ETABLISSEMENT"
+      ],
+      "mots_outils": [
+        "LOGICIEL",
+        "OUTIL",
+        "SOLUTION",
+        "PLATEFORME",
+        "CRM",
+        "ERP",
+        "SIRH",
+        "APPLICATION",
+        "PROGICIEL",
+        "MESSAGERIE",
+        "SAAS"
+      ]
+    }
+  }
+}

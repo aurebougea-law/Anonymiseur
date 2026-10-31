@@ -1,0 +1,990 @@
+{
+  "_lisez_moi": "Pre-detection settings (English build). Edit with Notepad. Words are written in CAPITALS, with or without accents. In 'attributs', 'libelle' is the internal (French) role name used by the engine: do not change it; 'affichage' is what the user sees; 'suffixe' builds the tag. Restart the program after editing.",
+  "_ocr": "Reading scanned PDFs. \"tesseract\" is the path to the Tesseract program, \"tessdata\" the folder holding the language files (eng.traineddata). Leave both empty and the program will look for them in the usual places.",
+  "ocr": {
+    "tesseract": "",
+    "tessdata": "",
+    "langue": "eng",
+    "resolution": 300
+  },
+  "_cabinet": "Names of the firm's lawyers, as they appear in your letters (example: \"Jane SMITH\"). Only used to tell whether a letter was SENT by the firm or RECEIVED. If the list is empty, the program asks you.",
+  "cabinet": {
+    "avocats": []
+  },
+  "_attributs": "The roles a term can have within a party. \"libelle\" is the internal (French) name used by the engine: do not change it; \"affichage\" is what the spreadsheet shows; \"suffixe\" is appended to the party code to form the tag: party DEFENDANT1 + Address = [DEFENDANT1_ADDRESS]. The Identity role (empty suffix) designates the party itself: [DEFENDANT1]. The order below is the order of the rows in the sheet.",
+  "attributs": [
+    {
+      "libelle": "Identité",
+      "suffixe": "",
+      "affichage": "Identity"
+    },
+    {
+      "libelle": "Adresse",
+      "suffixe": "ADDRESS",
+      "affichage": "Address"
+    },
+    {
+      "libelle": "SIRET",
+      "suffixe": "COMPANY_NO",
+      "affichage": "Company number"
+    },
+    {
+      "libelle": "Dirigeant",
+      "suffixe": "DIRECTOR",
+      "affichage": "Director"
+    },
+    {
+      "libelle": "Adresse dirigeant",
+      "suffixe": "DIRECTOR_ADDRESS",
+      "affichage": "Director's address"
+    },
+    {
+      "libelle": "Signataire",
+      "suffixe": "SIGNATORY",
+      "affichage": "Signatory"
+    },
+    {
+      "libelle": "Personne liée",
+      "suffixe": "PERSON",
+      "affichage": "Related person"
+    },
+    {
+      "libelle": "Salarié",
+      "suffixe": "EMPLOYEE",
+      "affichage": "Employee"
+    },
+    {
+      "libelle": "Enseigne",
+      "suffixe": "TRADE_NAME",
+      "affichage": "Trade name"
+    },
+    {
+      "libelle": "E-mail",
+      "suffixe": "EMAIL",
+      "affichage": "E-mail"
+    },
+    {
+      "libelle": "Téléphone",
+      "suffixe": "PHONE",
+      "affichage": "Phone"
+    },
+    {
+      "libelle": "IBAN",
+      "suffixe": "IBAN",
+      "affichage": "IBAN"
+    },
+    {
+      "libelle": "NIR",
+      "suffixe": "SSN",
+      "affichage": "Social security no. (NIR)"
+    },
+    {
+      "libelle": "Date de naissance",
+      "suffixe": "BIRTH_DATE",
+      "affichage": "Date of birth"
+    },
+    {
+      "libelle": "Site web",
+      "suffixe": "WEBSITE",
+      "affichage": "Website"
+    },
+    {
+      "libelle": "Avocat",
+      "suffixe": "LAWYER",
+      "affichage": "Lawyer"
+    },
+    {
+      "libelle": "Cabinet d'avocat",
+      "suffixe": "LAW_FIRM",
+      "affichage": "Law firm"
+    },
+    {
+      "libelle": "Adresse avocat",
+      "suffixe": "LAWYER_ADDRESS",
+      "affichage": "Lawyer's address"
+    },
+    {
+      "libelle": "E-mail avocat",
+      "suffixe": "LAWYER_EMAIL",
+      "affichage": "Lawyer's e-mail"
+    },
+    {
+      "libelle": "Téléphone avocat",
+      "suffixe": "LAWYER_PHONE",
+      "affichage": "Lawyer's phone"
+    },
+    {
+      "libelle": "Site web avocat",
+      "suffixe": "LAWYER_WEBSITE",
+      "affichage": "Lawyer's website"
+    },
+    {
+      "libelle": "Avocat postulant",
+      "suffixe": "LOCAL_COUNSEL",
+      "affichage": "Local counsel"
+    },
+    {
+      "libelle": "Adresse avocat postulant",
+      "suffixe": "LOCAL_COUNSEL_ADDRESS",
+      "affichage": "Local counsel's address"
+    },
+    {
+      "libelle": "Étude",
+      "suffixe": "BAILIFF_OFFICE",
+      "affichage": "Bailiff's office"
+    },
+    {
+      "libelle": "Marque",
+      "suffixe": "TRADEMARK",
+      "affichage": "Trademark"
+    },
+    {
+      "libelle": "Brevet",
+      "suffixe": "PATENT",
+      "affichage": "Patent"
+    },
+    {
+      "libelle": "Dessin et modèle",
+      "suffixe": "DESIGN",
+      "affichage": "Design"
+    },
+    {
+      "libelle": "Dépôt INPI",
+      "suffixe": "NATIONAL_FILING",
+      "affichage": "National filing"
+    },
+    {
+      "libelle": "Dépôt européen",
+      "suffixe": "EU_FILING",
+      "affichage": "European filing"
+    },
+    {
+      "libelle": "Logiciel",
+      "suffixe": "SOFTWARE",
+      "affichage": "Software"
+    },
+    {
+      "libelle": "Produit",
+      "suffixe": "PRODUCT",
+      "affichage": "Product"
+    },
+    {
+      "libelle": "Référence RG",
+      "suffixe": "CASE_NO",
+      "affichage": "Case number"
+    },
+    {
+      "libelle": "Montant",
+      "suffixe": "AMOUNT",
+      "affichage": "Amount"
+    },
+    {
+      "libelle": "Pièce",
+      "suffixe": "EXHIBIT",
+      "affichage": "Exhibit"
+    },
+    {
+      "libelle": "Version logiciel",
+      "suffixe": "SOFTWARE_VERSION",
+      "affichage": "Software version"
+    },
+    {
+      "libelle": "Empreinte fichier",
+      "suffixe": "FILE_HASH",
+      "affichage": "File hash"
+    },
+    {
+      "libelle": "URL dépôt",
+      "suffixe": "REPO_URL",
+      "affichage": "Repository URL"
+    },
+    {
+      "libelle": "Clé de licence",
+      "suffixe": "LICENCE_KEY",
+      "affichage": "Licence key"
+    },
+    {
+      "libelle": "Donnée",
+      "suffixe": "DATA",
+      "affichage": "Data item"
+    }
+  ],
+  "_types_detection": "What the detector recognises (left) and the role it proposes (right). A label on the right must appear in the list of attributes above.",
+  "types_detection_vers_attribut": {
+    "personne_physique": "Identité",
+    "personne_morale": "Identité",
+    "representant_legal": "Dirigeant",
+    "adresse": "Adresse",
+    "siret": "SIRET",
+    "siren": "SIRET",
+    "rcs": "SIRET",
+    "email": "E-mail",
+    "telephone": "Téléphone",
+    "iban": "IBAN",
+    "nir": "NIR",
+    "date_naissance": "Date de naissance",
+    "site_web": "Site web",
+    "avocat": "Avocat",
+    "commissaire_justice": "Identité",
+    "enseigne": "Enseigne",
+    "marque": "Marque",
+    "brevet": "Brevet",
+    "dessin_modele": "Dessin et modèle",
+    "depot_inpi": "Dépôt INPI",
+    "rg": "Référence RG",
+    "outil": "Identité",
+    "expert": "Identité",
+    "produit": "Produit",
+    "candidat": "Identité"
+  },
+  "libelles_lisibles": {
+    "personne_physique": "Natural person",
+    "representant_legal": "Legal representative",
+    "personne_morale": "Company / entity",
+    "adresse": "Address",
+    "siret": "Company number",
+    "siren": "Company number",
+    "rcs": "Registry number",
+    "email": "E-mail",
+    "telephone": "Phone",
+    "iban": "IBAN",
+    "nir": "Social security no. (NIR)",
+    "date_naissance": "Date of birth",
+    "site_web": "Website",
+    "avocat": "Lawyer",
+    "commissaire_justice": "Bailiff",
+    "rg": "Case number",
+    "marque": "Trademark",
+    "brevet": "Patent",
+    "dessin_modele": "Design",
+    "depot_inpi": "Filing",
+    "enseigne": "Trade name",
+    "outil": "Tool / software",
+    "expert": "Expert",
+    "produit": "Product / range",
+    "candidat": "Unrecognised (to sort)"
+  },
+  "_roles_communs": "Participants that exist whatever the type of document. \"avant\": words which, placed just before a person's name, designate this role.",
+  "roles_communs": [
+    {
+      "code": "BAILIFF",
+      "libelle": "Bailiff",
+      "pluriel": true,
+      "avant": []
+    },
+    {
+      "code": "EXPERT",
+      "libelle": "Expert",
+      "pluriel": true,
+      "avant": [
+        "EXPERT",
+        "EXPERTE",
+        "EXPERT JUDICIAIRE",
+        "SAPITEUR",
+        "EXPERT WITNESS",
+        "COURT EXPERT"
+      ]
+    },
+    {
+      "code": "JUDGE",
+      "libelle": "Judge",
+      "pluriel": true,
+      "avant": [
+        "PRESIDENT :",
+        "PRESIDENTE :",
+        "JUGE :",
+        "CONSEILLER :",
+        "CONSEILLERE :",
+        "MAGISTRAT",
+        "JUGE",
+        "VICE-PRESIDENT",
+        "VICE-PRESIDENTE",
+        "JUDGE:",
+        "PRESIDING JUDGE",
+        "THE HONOURABLE"
+      ]
+    },
+    {
+      "code": "CLERK",
+      "libelle": "Clerk",
+      "pluriel": true,
+      "avant": [
+        "GREFFIER",
+        "GREFFIERE",
+        "CLERK",
+        "COURT CLERK"
+      ]
+    },
+    {
+      "code": "THIRD_PARTY",
+      "libelle": "Third party",
+      "pluriel": true,
+      "avant": []
+    },
+    {
+      "code": "EMPLOYEE",
+      "libelle": "Employee",
+      "pluriel": true,
+      "avant": []
+    }
+  ],
+  "_parties_menu": "Parties offered in the menus (Party and Tag) without being produced by detection: the user picks them. \"numeros\": how many numbers are offered up front (COMPANY1 to COMPANY6). \"personne_physique\": true = shorter role menu (no company number, director, trade name, website). The \"*\" key applies to every type of document; the other keys are document types (contentieux, contrat...). Adding a line here is enough, without touching the program.",
+  "parties_menu": {
+    "*": [
+      {
+        "code": "COMPANY",
+        "libelle": "Company",
+        "numeros": 6
+      },
+      {
+        "code": "INDIVIDUAL",
+        "libelle": "Individual",
+        "numeros": 4,
+        "personne_physique": true
+      },
+      {
+        "code": "LEGAL_ENTITY",
+        "libelle": "Legal entity",
+        "numeros": 4
+      }
+    ]
+  },
+  "_types_documents": "One block per type of document. \"signaux\": words that identify the type (the most frequent wins). \"fin_entete\": headings, at the start of a line, that mark the end of the parties section. \"separateurs\": words, at the start of a line, that open a party's block without giving its role (BETWEEN, AND...). For each role: \"code\" (form of the tag), \"pluriel\" (true = numbered CLAIMANT1, CLAIMANT2; false = PROVIDER, then PROVIDER2 if there is a second one), \"qualites\" (words that designate this role in the parties section), \"ouvreurs\" (words, at the start of a line, that open this role's block).",
+  "_definitions_roles_admis": "Defined terms of a contract (\"hereinafter the X\") accepted as a party code, IN ADDITION to the usual roles the program knows (Provider, Customer, Lessor, Lessee, Licensee...). Any other defined term (a name, an acronym, a brand: \"hereinafter \"AGICE\"\") is discarded: a tag must never reveal the name it masks. Add your own speciality roles here, in capitals.",
+  "definitions_roles_admis": [],
+  "_codes_courts": "Short codes since 15/10/2026: CLM (claimant), DEF (defendant), APP (appellant), RESP (respondent), INTERV (intervener), CLI (our client), OPP (opposing party). The party is numbered and what belongs to it hangs off it: [DEF1], [DEF1_ADDRESS], [DEF1_DIRECTOR]. Sheets created earlier keep their former tags ([DEFENDANT1]...).",
+  "types_documents": {
+    "contentieux": {
+      "libelle": "Litigation (claim, pleadings, judgment)",
+      "signaux": [
+        "ASSIGNATION",
+        "CONCLUSIONS",
+        "TRIBUNAL",
+        "COUR D'APPEL",
+        "PLAISE",
+        "PAR CES MOTIFS",
+        "A LA REQUETE DE",
+        "DEMANDERESSE",
+        "DEFENDERESSE",
+        "INTIMEE",
+        "APPELANTE",
+        "N° RG",
+        "JUGEMENT",
+        "ORDONNANCE",
+        "CLAIM FORM",
+        "PARTICULARS OF CLAIM",
+        "STATEMENT OF CASE",
+        "DEFENCE",
+        "COMPLAINT",
+        "PLAINTIFF",
+        "CLAIMANT",
+        "DEFENDANT",
+        "RESPONDENT",
+        "APPELLANT",
+        "CASE NO",
+        "BEFORE THE",
+        "IN THE HIGH COURT",
+        "DISTRICT COURT",
+        "JUDGMENT",
+        "ORDER",
+        "WHEREFORE"
+      ],
+      "fin_entete": [
+        "FAITS",
+        "EN FAIT",
+        "RAPPEL DES FAITS",
+        "EXPOSE",
+        "EXPOSE DU LITIGE",
+        "PLAISE",
+        "PAR CES MOTIFS",
+        "DISCUSSION",
+        "MOTIFS",
+        "OBJET DE LA DEMANDE",
+        "D'AVOIR A COMPARAITRE",
+        "SUR QUOI",
+        "FACTS",
+        "STATEMENT OF FACTS",
+        "BACKGROUND",
+        "INTRODUCTION",
+        "GROUNDS",
+        "ARGUMENT",
+        "LEGAL ARGUMENT",
+        "RELIEF SOUGHT",
+        "PRAYER FOR RELIEF",
+        "PARTICULARS"
+      ],
+      "separateurs": [
+        "POUR",
+        "ENTRE",
+        "ET",
+        "BETWEEN",
+        "AND",
+        "-V-",
+        "V.",
+        "VS."
+      ],
+      "roles": [
+        {
+          "code": "CLM",
+          "pluriel": true,
+          "qualites": [
+            "DEMANDEUR",
+            "DEMANDEURS",
+            "DEMANDERESSE",
+            "DEMANDERESSES",
+            "REQUERANT",
+            "REQUERANTS",
+            "REQUERANTE",
+            "REQUERANTES",
+            "CLAIMANT",
+            "CLAIMANTS",
+            "PLAINTIFF",
+            "PLAINTIFFS",
+            "APPLICANT",
+            "APPLICANTS",
+            "PETITIONER"
+          ],
+          "ouvreurs": [
+            "A LA REQUETE DE",
+            "ON THE APPLICATION OF",
+            "AT THE REQUEST OF"
+          ]
+        },
+        {
+          "code": "DEF",
+          "pluriel": true,
+          "qualites": [
+            "DEFENDEUR",
+            "DEFENDEURS",
+            "DEFENDERESSE",
+            "DEFENDERESSES",
+            "DEFENDANT",
+            "DEFENDANTS"
+          ],
+          "ouvreurs": [
+            "CONTRE",
+            "DONNE ASSIGNATION A",
+            "ASSIGNE",
+            "ASSIGNEE",
+            "ASSIGNES",
+            "ASSIGNEES",
+            "AGAINST",
+            "-V-",
+            "VERSUS"
+          ]
+        },
+        {
+          "code": "APP",
+          "pluriel": true,
+          "qualites": [
+            "APPELANT",
+            "APPELANTS",
+            "APPELANTE",
+            "APPELANTES",
+            "APPELLANT",
+            "APPELLANTS"
+          ],
+          "ouvreurs": []
+        },
+        {
+          "code": "RESP",
+          "pluriel": true,
+          "qualites": [
+            "INTIME",
+            "INTIMES",
+            "INTIMEE",
+            "INTIMEES",
+            "RESPONDENT",
+            "RESPONDENTS"
+          ],
+          "ouvreurs": []
+        },
+        {
+          "code": "INTERV",
+          "pluriel": true,
+          "qualites": [
+            "INTERVENANT",
+            "INTERVENANTE",
+            "INTERVENANTS",
+            "INTERVENANTES",
+            "INTERVENANT VOLONTAIRE",
+            "INTERVENANTE VOLONTAIRE",
+            "INTERVENANT FORCE",
+            "INTERVENANTE FORCEE",
+            "INTERVENER",
+            "INTERVENERS",
+            "INTERVENOR"
+          ],
+          "ouvreurs": []
+        }
+      ]
+    },
+    "contrat": {
+      "libelle": "Contract (agreement, T&Cs, DPA, licence, NDA)",
+      "signaux": [
+        "ENTRE LES SOUSSIGNES",
+        "CI-APRES DENOMME",
+        "CI-APRES DENOMMEE",
+        "CI-APRES",
+        "IL A ETE CONVENU",
+        "CONDITIONS GENERALES",
+        "OBJET DU CONTRAT",
+        "DUREE DU CONTRAT",
+        "RESILIATION",
+        "ARTICLE 1",
+        "LES PARTIES",
+        "FAIT EN",
+        "EXEMPLAIRES",
+        "THIS AGREEMENT",
+        "BETWEEN THE UNDERSIGNED",
+        "HEREINAFTER",
+        "HEREINAFTER REFERRED TO AS",
+        "IT IS AGREED",
+        "TERMS AND CONDITIONS",
+        "SUBJECT MATTER",
+        "TERM OF THE AGREEMENT",
+        "TERMINATION",
+        "CLAUSE 1",
+        "THE PARTIES",
+        "WHEREAS",
+        "IN WITNESS WHEREOF",
+        "COUNTERPARTS"
+      ],
+      "fin_entete": [
+        "PREAMBULE",
+        "IL A ETE CONVENU",
+        "IL EST CONVENU",
+        "ETANT PREALABLEMENT EXPOSE",
+        "CECI EXPOSE",
+        "ARTICLE 1",
+        "ARTICLE PREMIER",
+        "1. OBJET",
+        "OBJET",
+        "DEFINITIONS",
+        "RECITALS",
+        "WHEREAS",
+        "IT IS AGREED",
+        "NOW THEREFORE",
+        "BACKGROUND",
+        "CLAUSE 1",
+        "1. DEFINITIONS",
+        "DEFINITIONS",
+        "1. SUBJECT",
+        "SCOPE"
+      ],
+      "separateurs": [
+        "ENTRE",
+        "ET",
+        "ENTRE LES SOUSSIGNES",
+        "BETWEEN",
+        "AND",
+        "BETWEEN THE UNDERSIGNED"
+      ],
+      "_roles": "In a contract, the role is read from the contract itself (hereinafter \"the Provider\" gives PROVIDER). The list below is only a fallback when no definition is found: \"mots\" are searched for in the party's block.",
+      "roles": [
+        {
+          "code": "PROVIDER",
+          "pluriel": false,
+          "qualites": [],
+          "ouvreurs": [],
+          "mots": [
+            "PRESTATAIRE",
+            "FOURNISSEUR",
+            "EDITEUR",
+            "VENDEUR",
+            "CONCEDANT",
+            "CEDANT",
+            "SOUS-TRAITANT",
+            "PROVIDER",
+            "SUPPLIER",
+            "VENDOR",
+            "PUBLISHER",
+            "LICENSOR",
+            "ASSIGNOR",
+            "SELLER",
+            "CONTRACTOR",
+            "PROCESSOR",
+            "SERVICE PROVIDER"
+          ]
+        },
+        {
+          "code": "CUSTOMER",
+          "pluriel": false,
+          "qualites": [],
+          "ouvreurs": [],
+          "mots": [
+            "CLIENT",
+            "CLIENTE",
+            "ACHETEUR",
+            "ABONNE",
+            "LICENCIE",
+            "CESSIONNAIRE",
+            "UTILISATEUR",
+            "CUSTOMER",
+            "CLIENT",
+            "BUYER",
+            "PURCHASER",
+            "SUBSCRIBER",
+            "LICENSEE",
+            "ASSIGNEE",
+            "USER",
+            "CONTROLLER"
+          ]
+        }
+      ],
+      "definitions_ignorees": [
+        "CONTRAT",
+        "PARTIE",
+        "PARTIES",
+        "CONDITIONS",
+        "CONDITIONS GENERALES",
+        "SERVICE",
+        "SERVICES",
+        "SOLUTION",
+        "ACCORD",
+        "AVENANT",
+        "ANNEXE",
+        "ANNEXES",
+        "LOGICIEL",
+        "DONNEES",
+        "PRESTATIONS",
+        "PRESTATION",
+        "COMMANDE",
+        "BON DE COMMANDE",
+        "SITE",
+        "PLATEFORME",
+        "OFFRE",
+        "DOCUMENTATION",
+        "LIVRABLES",
+        "PRIX",
+        "AGREEMENT",
+        "PARTY",
+        "PARTIES",
+        "TERMS",
+        "CONDITIONS",
+        "SERVICE",
+        "SERVICES",
+        "SOLUTION",
+        "AMENDMENT",
+        "SCHEDULE",
+        "SCHEDULES",
+        "ANNEX",
+        "EXHIBIT",
+        "SOFTWARE",
+        "DATA",
+        "DELIVERABLES",
+        "ORDER",
+        "PURCHASE ORDER",
+        "SITE",
+        "PLATFORM",
+        "OFFER",
+        "DOCUMENTATION",
+        "PRICE",
+        "FEES",
+        "EFFECTIVE DATE",
+        "CONFIDENTIAL INFORMATION",
+        "INTELLECTUAL PROPERTY"
+      ]
+    },
+    "mise_en_demeure": {
+      "libelle": "Letter (demand letter, letter before action)",
+      "signaux": [
+        "MISE EN DEMEURE",
+        "METS EN DEMEURE",
+        "METTONS EN DEMEURE",
+        "LETTRE RECOMMANDEE",
+        "LRAR",
+        "AVEC ACCUSE DE RECEPTION",
+        "A DEFAUT",
+        "OBJET :",
+        "MON CLIENT",
+        "MA CLIENTE",
+        "NOTRE CLIENT",
+        "NOTRE CLIENTE",
+        "CHER CONFRERE",
+        "CHERE CONSOEUR",
+        "JE VOUS PRIE",
+        "VEUILLEZ AGREER",
+        "FORMAL NOTICE",
+        "NOTICE OF DEFAULT",
+        "CEASE AND DESIST",
+        "LETTER BEFORE ACTION",
+        "LETTER BEFORE CLAIM",
+        "DEMAND LETTER",
+        "WITHOUT PREJUDICE",
+        "REGISTERED MAIL",
+        "RECORDED DELIVERY",
+        "RE:",
+        "OUR CLIENT",
+        "OUR CLIENTS",
+        "DEAR SIR",
+        "DEAR MADAM",
+        "DEAR SIRS",
+        "YOURS FAITHFULLY",
+        "YOURS SINCERELY",
+        "WE ACT FOR",
+        "I ACT FOR"
+      ],
+      "fin_entete": [
+        "OBJET",
+        "MADAME, MONSIEUR",
+        "MADAME,",
+        "MONSIEUR,",
+        "MESSIEURS,",
+        "MAITRE,",
+        "CHER CONFRERE",
+        "CHERE CONSOEUR",
+        "MON CHER CONFRERE",
+        "MA CHERE CONSOEUR",
+        "RE:",
+        "DEAR SIR",
+        "DEAR MADAM",
+        "DEAR SIRS",
+        "DEAR SIR OR MADAM",
+        "DEAR MR",
+        "DEAR MS",
+        "DEAR MRS"
+      ],
+      "separateurs": [],
+      "_roles": "Roles are seen from the firm's side: OUR_CLIENT stays our client whether the letter is sent or received. \"representation\": words that introduce a lawyer's client (\"acting for X Ltd\").",
+      "roles": [
+        {
+          "code": "CLI",
+          "pluriel": false,
+          "qualites": [],
+          "ouvreurs": []
+        },
+        {
+          "code": "OPP",
+          "pluriel": false,
+          "qualites": [],
+          "ouvreurs": []
+        }
+      ],
+      "representation": [
+        "CONSEIL DE",
+        "CONSEILS DE",
+        "MON CLIENT",
+        "MA CLIENTE",
+        "MES CLIENTS",
+        "NOTRE CLIENT",
+        "NOTRE CLIENTE",
+        "NOS CLIENTS",
+        "POUR LE COMPTE DE",
+        "AU NOM ET POUR LE COMPTE DE",
+        "INTERVIENS POUR",
+        "INTERVENONS POUR",
+        "INTERETS DE",
+        "COUNSEL FOR",
+        "COUNSEL TO",
+        "SOLICITORS FOR",
+        "ATTORNEYS FOR",
+        "ON BEHALF OF",
+        "WE ACT FOR",
+        "I ACT FOR",
+        "WE ARE INSTRUCTED BY",
+        "OUR CLIENT",
+        "OUR CLIENTS",
+        "MY CLIENT",
+        "INTERESTS OF",
+        "INSTRUCTED BY"
+      ],
+      "representation_destinataire": [
+        "VOTRE CLIENT",
+        "VOTRE CLIENTE",
+        "VOS CLIENTS",
+        "VOTRE SOCIETE",
+        "YOUR CLIENT",
+        "YOUR CLIENTS",
+        "YOUR COMPANY"
+      ]
+    },
+    "audit_rgpd": {
+      "libelle": "GDPR audit",
+      "signaux": [
+        "AUDIT",
+        "RGPD",
+        "REGLEMENT GENERAL SUR LA PROTECTION",
+        "REGISTRE DES TRAITEMENTS",
+        "RESPONSABLE DE TRAITEMENT",
+        "RESPONSABLE DU TRAITEMENT",
+        "SOUS-TRAITANT",
+        "DONNEES A CARACTERE PERSONNEL",
+        "DPO",
+        "DELEGUE A LA PROTECTION",
+        "AIPD",
+        "CNIL",
+        "DUREE DE CONSERVATION",
+        "BASE LEGALE",
+        "GDPR",
+        "GENERAL DATA PROTECTION REGULATION",
+        "RECORD OF PROCESSING",
+        "RECORDS OF PROCESSING",
+        "DATA CONTROLLER",
+        "DATA PROCESSOR",
+        "PERSONAL DATA",
+        "DATA PROTECTION OFFICER",
+        "DPIA",
+        "RETENTION PERIOD",
+        "LAWFUL BASIS",
+        "LEGAL BASIS",
+        "SUPERVISORY AUTHORITY",
+        "ICO"
+      ],
+      "fin_entete": [],
+      "separateurs": [],
+      "roles": [
+        {
+          "code": "AUDITED_ENTITY",
+          "pluriel": false,
+          "qualites": [],
+          "ouvreurs": [],
+          "pres": [
+            "SOCIETE AUDITEE",
+            "ORGANISME AUDITE",
+            "ENTITE AUDITEE",
+            "AUDIT DE LA SOCIETE",
+            "AUDIT DE",
+            "AUDITE",
+            "AUDITEE",
+            "AUDITED COMPANY",
+            "AUDITED ENTITY",
+            "AUDITED ORGANISATION",
+            "AUDIT OF",
+            "AUDITEE"
+          ]
+        },
+        {
+          "code": "PROCESSOR",
+          "pluriel": true,
+          "qualites": [],
+          "ouvreurs": [],
+          "pres": [
+            "SOUS-TRAITANT",
+            "SOUS TRAITANT",
+            "PRESTATAIRE",
+            "HEBERGEUR",
+            "EDITEUR",
+            "FOURNISSEUR",
+            "PROCESSOR",
+            "DATA PROCESSOR",
+            "SUB-PROCESSOR",
+            "SUBPROCESSOR",
+            "SUPPLIER",
+            "VENDOR",
+            "HOSTING PROVIDER",
+            "PROVIDER"
+          ]
+        },
+        {
+          "code": "CONTROLLER",
+          "pluriel": true,
+          "qualites": [],
+          "ouvreurs": [],
+          "pres": [
+            "RESPONSABLE DE TRAITEMENT",
+            "RESPONSABLE DU TRAITEMENT",
+            "RESPONSABLES CONJOINTS",
+            "CO-RESPONSABLE",
+            "SOCIETE MERE",
+            "MAISON MERE",
+            "CONTROLLER",
+            "DATA CONTROLLER",
+            "JOINT CONTROLLER",
+            "JOINT CONTROLLERS",
+            "PARENT COMPANY"
+          ]
+        },
+        {
+          "code": "DPO",
+          "pluriel": false,
+          "qualites": [],
+          "ouvreurs": [],
+          "pres": [
+            "DPO",
+            "DELEGUE A LA PROTECTION DES DONNEES",
+            "DELEGUEE A LA PROTECTION DES DONNEES",
+            "DPO",
+            "DATA PROTECTION OFFICER"
+          ]
+        },
+        {
+          "code": "CONTACT",
+          "pluriel": true,
+          "qualites": [],
+          "ouvreurs": [],
+          "pres": [
+            "REFERENT",
+            "REFERENTE",
+            "DSI",
+            "RESPONSABLE INFORMATIQUE",
+            "DIRECTEUR DES SYSTEMES",
+            "DIRECTRICE DES SYSTEMES",
+            "RESPONSABLE RGPD",
+            "RESPONSABLE CONFORMITE",
+            "INTERLOCUTEUR",
+            "INTERLOCUTRICE",
+            "CONTACT",
+            "POINT OF CONTACT",
+            "CIO",
+            "CTO",
+            "IT MANAGER",
+            "HEAD OF IT",
+            "COMPLIANCE OFFICER",
+            "PRIVACY OFFICER",
+            "GDPR LEAD",
+            "PRIVACY LEAD"
+          ]
+        },
+        {
+          "code": "TOOL",
+          "pluriel": true,
+          "qualites": [],
+          "ouvreurs": [],
+          "pres": []
+        }
+      ],
+      "definitions_organisme": [
+        "SOCIETE",
+        "ORGANISME",
+        "CLIENT",
+        "ENTREPRISE",
+        "ENTITE",
+        "GROUPE",
+        "ETABLISSEMENT",
+        "COMPANY",
+        "ORGANISATION",
+        "ORGANIZATION",
+        "CLIENT",
+        "CUSTOMER",
+        "ENTITY",
+        "GROUP",
+        "FIRM",
+        "BUSINESS"
+      ],
+      "mots_outils": [
+        "LOGICIEL",
+        "OUTIL",
+        "SOLUTION",
+        "PLATEFORME",
+        "CRM",
+        "ERP",
+        "SIRH",
+        "APPLICATION",
+        "PROGICIEL",
+        "MESSAGERIE",
+        "SAAS",
+        "SOFTWARE",
+        "TOOL",
+        "SOLUTION",
+        "PLATFORM",
+        "APPLICATION",
+        "APP",
+        "SYSTEM",
+        "EMAIL SYSTEM",
+        "SAAS",
+        "DATABASE"
+      ]
+    }
+  }
+}

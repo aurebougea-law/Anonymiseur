@@ -1,0 +1,55 @@
+ANONYMIZATOR, version 2026.10.1
+LICENCE
+=======
+
+Author: Aurélien Bougeard, avocat (French lawyer).
+
+Anonymizator is free software, released under the GNU Affero General
+Public License, version 3 (AGPL v3). The full text of the licence, which
+alone is binding, is in the file LICENSE_AGPL-3.0.txt. What follows is a
+plain-language summary.
+
+WHAT YOU MAY DO
+- Use it freely, in your practice, with no time limit and on as many
+  computers as you wish.
+- Pass it on to others, as it is.
+- Modify it and release your own version, on one condition: release it
+  under this same licence, with its source code, keeping the original
+  author's name. What started free stays free.
+- Adapt the Excel tables (matters, tags, roles) to your field: they are
+  made for that, and you are welcome to share your grids.
+
+WHAT YOU MAY NOT DO
+- Release a modified version without its source code, or under another
+  licence.
+- Remove the author's name or present the program as your own work.
+
+THE SOURCE CODE
+It is included, in the "Source code" folder: the Python modules, the
+settings and the scripts that build the executable. You may read it,
+check it, change it. No particular skill is needed to use the program:
+the executable is enough.
+
+NO WARRANTY
+The program is provided "as is", without warranty of any kind (sections
+15 and 16 of the licence). It is an aid, not a substitute for
+proofreading: whatever is put into an AI tool remains the sole
+responsibility of the person who puts it there.
+
+THIRD-PARTY COMPONENTS
+The program embeds PyMuPDF (AGPL v3, the same licence) as well as
+Python, python-docx, openpyxl and lxml (permissive free licences).
+The Tesseract folder contains Tesseract OCR (Apache 2.0 licence,
+included) and the libraries that come with it. The full list, with
+versions and licences, is in THIRD_PARTY_COMPONENTS.txt.
+
+CHECKSUMS
+CHECKSUMS_SHA256.txt gives the checksum of every file in the package,
+to spot a damaged or modified file. To check that the zip you received
+is the original, compare its checksum with the one published with the
+download link.
+
+CONTACT
+Comments, grids to share, bug reports: as a comment under the LinkedIn
+post that released the program, or on the LinkedIn page dedicated to it,
+if one exists.

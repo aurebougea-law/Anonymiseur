@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Anonymiseur : mode d'emploi</title>
+<style>
+  @page { size: A4; margin: 13mm 14mm 15mm 14mm;
+          @bottom-left { content: "Anonymiseur · mode d'emploi · version 2026.10.1"; font: 8pt "DejaVu Sans"; color: #8A96A3; }
+          @bottom-right { content: counter(page) " / " counter(pages); font: 8pt "DejaVu Sans"; color: #8A96A3; } }
+  body { font-family: "DejaVu Sans", "Segoe UI", sans-serif; font-size: 9pt; color: #1F2933; line-height: 1.35; }
+  h1 { font-size: 24pt; color: #1B3A5C; margin: 0 0 2mm 0; letter-spacing: -0.3pt; }
+  h2 { font-size: 14pt; color: #1B3A5C; margin: 0 0 4mm 0; padding-bottom: 1.5mm; border-bottom: 2px solid #1B3A5C; }
+  h3 { font-size: 10.5pt; color: #1B3A5C; margin: 5mm 0 1.5mm 0; }
+  p { margin: 0 0 2.5mm 0; }
+  .sous { color: #5F6B76; font-size: 11pt; margin-bottom: 6mm; }
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .bandeau { background: #1B3A5C; color: white; padding: 5mm 7mm; margin: -6mm -4mm 5mm -4mm; }
+  .bandeau h1 { color: white; }
+  .bandeau .sous { color: #C9D6E3; margin: 0; }
+  .etapes { display: flex; gap: 4mm; margin: 3mm 0 3mm 0; }
+  .etape { flex: 1; border: 1px solid #D9DFE5; border-top: 4px solid #1B3A5C; padding: 2.5mm 3.5mm; background: #FBFCFD; }
+  .etape .num { font-size: 20pt; font-weight: bold; color: #1B3A5C; line-height: 1; margin-bottom: 1.5mm; }
+  .etape .titre { font-weight: bold; margin-bottom: 1.5mm; }
+  .etape p { font-size: 8pt; color: #3E4A56; margin: 0 0 1.5mm 0; }
+  .teal { border-top-color: #2A6F77; } .teal .num { color: #2A6F77; }
+  .rouge { border-top-color: #B23B3B; } .rouge .num { color: #B23B3B; }
+  .vert { border-top-color: #2E7D4F; } .vert .num { color: #2E7D4F; }
+  .encadre { background: #E8EEF4; padding: 3.5mm 5mm; margin: 3mm 0 4mm 0; border-left: 4px solid #1B3A5C; }
+  .encadre.alerte { background: #F8ECEC; border-left-color: #B23B3B; }
+  .encadre .t { font-weight: bold; color: #1B3A5C; margin-bottom: 1mm; }
+  .encadre.alerte .t { color: #B23B3B; }
+  .cle { font-family: "DejaVu Sans Mono", monospace; font-size: 8.8pt; background: #EEF1F4; padding: 0 1.5mm; border-radius: 2px; }
+  table { border-collapse: collapse; width: 100%; margin: 2mm 0 4mm 0; font-size: 9pt; }
+  th { background: #1B3A5C; color: white; text-align: left; padding: 1.8mm 2.5mm; font-weight: bold; }
+  td { padding: 1mm 2.5mm; border-bottom: 1px solid #D9DFE5; vertical-align: top; }
+  tr.groupe td { background: #E8EEF4; font-weight: bold; color: #1B3A5C; }
+  .deux { display: table; width: 100%; border-spacing: 0; }
+  .deux > div { display: table-cell; width: 50%; vertical-align: top; padding-right: 5mm; }
+  .deux > div + div { padding-right: 0; padding-left: 2mm; }
+  .flux { display: flex; align-items: stretch; gap: 2mm; margin: 2mm 0 3mm 0; }
+  .flux .b { flex: 1; padding: 3mm; text-align: center; color: white; font-weight: bold; font-size: 9.5pt; }
+  .flux .fl { align-self: center; color: #8A96A3; font-size: 14pt; }
+  .regle { display: flex; gap: 3mm; margin-bottom: 2.5mm; }
+  .regle .n { flex: 0 0 8mm; height: 8mm; border-radius: 4mm; background: #1B3A5C; color: white; font-weight: bold; text-align: center; line-height: 8mm; }
+  .faq dt { font-weight: bold; color: #1B3A5C; margin-top: 1.5mm; }
+  .faq dd { margin: 0.4mm 0 0 0; font-size: 8.6pt; }
+  .petit { font-size: 8.5pt; color: #5F6B76; }
+  ul { margin: 1mm 0 2mm 0; padding-left: 5mm; }
+  li { margin-bottom: 1mm; }
+</style>
+</head>
+<body>
+
+<!-- ============================ PAGE 1 ============================ -->
+<section class="page">
+  <div class="bandeau">
+    <h1>Anonymiseur</h1>
+    <p class="sous">Remplace les noms de vos documents par des balises avant que vous les déposiez dans une IA, puis remet les vrais noms dans la réponse.<br>
+    <b>Le programme n'utilise aucune IA</b>, ni pour détecter, ni pour anonymiser : des règles, hors ligne. Tout se passe sur votre ordinateur, il n'envoie rien, nulle part.</p>
+  </div>
+
+  <h2>Installer : trois gestes, rien à installer</h2>
+  <div class="etapes">
+    <div class="etape"><div class="num">1</div><div class="titre">Décompressez le zip</div>
+      <p>Clic droit sur <span class="cle">Anonymiseur_2026.10.1.zip</span>, puis « Extraire tout… ».</p>
+      <p>Choisissez un dossier à vous, par exemple <b>Documents</b>. Évitez « Program Files » et les clés USB en lecture seule : le programme doit pouvoir écrire à côté de lui.</p></div>
+    <div class="etape"><div class="num">2</div><div class="titre">Double-cliquez sur Anonymiseur.exe</div>
+      <p>La première ouverture prend quelques secondes.</p>
+      <p>Si Windows affiche « Windows a protégé votre ordinateur » : cliquez sur <b>Informations complémentaires</b>, puis sur <b>Exécuter quand même</b>. Ce message apparaît pour tout programme qui n'a pas acheté de signature numérique ; il ne signale pas un danger.</p></div>
+    <div class="etape"><div class="num">3</div><div class="titre">C'est prêt</div>
+      <p>Au premier lancement, le programme crée à côté de lui un dossier <span class="cle">Données</span> : votre table <span class="cle">Correspondances.xlsx</span>, le dossier <span class="cle">Journaux</span> et un document fictif pour essayer.</p>
+      <p>Il n'y a rien d'autre à faire.</p></div>
+  </div>
+
+  <div class="encadre">
+    <div class="t">Ce que contient le dossier après le premier lancement</div>
+    <table>
+      <tr><th style="width:38%">Fichier ou dossier</th><th>À quoi il sert</th></tr>
+      <tr><td><b>Anonymiseur.exe</b></td><td>Le programme. Le seul fichier à double-cliquer.</td></tr>
+      <tr><td>Mode d'emploi.pdf</td><td>Ce document. Il s'ouvre aussi depuis l'onglet « Aide » du programme.</td></tr>
+      <tr><td><b>Données\Correspondances.xlsx</b></td><td>Votre table : quel vrai nom devient quelle balise. Un fichier Excel ordinaire, que vous pouvez remplir vous-même (page 5). <b>Confidentiel</b> : il ne se transmet jamais.</td></tr>
+      <tr><td>Données\Journaux\</td><td>Un petit fichier par document anonymisé. Il permet de remettre les vrais noms exactement.</td></tr>
+      <tr><td>Données\Exemples\</td><td>Un document fictif qui correspond au dossier « Exemple » de la table. Pour s'entraîner.</td></tr>
+      <tr><td>Données\config.json, detection_config.json</td><td>Réglages. Vous n'avez pas à les ouvrir.</td></tr>
+      <tr><td>Tesseract\</td><td>Sert à lire les PDF scannés. Logiciel libre fourni avec le programme. Ne rien y toucher.</td></tr>
+      <tr><td>Documentation technique\</td><td>Licence du logiciel libre (AGPL v3, résumée en une page dans LICENCE.txt), composants tiers, empreintes des fichiers.</td></tr>
+      <tr><td>Code source\</td><td>Le code du programme, joint comme la licence l'exige. Vous n'avez pas à l'ouvrir pour utiliser le programme.</td></tr>
+    </table>
+    <p class="petit">Pour sauvegarder : copiez le dossier <b>Données</b>. Pour changer de poste : recopiez tout le dossier.</p>
+  </div>
+
+</section>
+
+<!-- ============================ PAGE 2 ============================ -->
+<section class="page">
+  <h2>Essayer en deux minutes</h2>
+  <ul>
+    <li>En haut de la fenêtre, bouton <b>Choisir…</b> : prenez le document du dossier <span class="cle">Données\Exemples</span>. Table « Mes correspondances », Dossier « Exemple ».</li>
+    <li>Onglet <b>2. Anonymiser</b>, bouton bleu. Un fichier <span class="cle">…_ANONYMISE.docx</span> apparaît à côté de l'original : ouvrez-le, les noms sont devenus des balises.</li>
+    <li>Onglet <b>3. Contrôler</b>, bouton rouge : le programme confirme qu'aucun nom ne reste en clair.</li>
+    <li>Onglet <b>4. Restituer</b>, bouton vert, sur le fichier <span class="cle">…_ANONYMISE.docx</span> : les vrais noms reviennent dans un fichier <span class="cle">…_RESTITUE.docx</span>.</li>
+  </ul>
+
+  <h2 style="margin-top:4mm">Le principe</h2>
+  <p>Votre table dit, par exemple : « Société Horizon Numérique » devient <span class="cle">[DEM1]</span>, et « 12 rue des Lilas, 59000 Lille » devient <span class="cle">[DEM1_ADRESSE]</span>. Le programme fait les remplacements. Vous déposez le document anonymisé dans l'IA. Quand la réponse revient, le programme remet les vrais noms.</p>
+  <p>Les balises se comprennent sans la table : l'IA voit que <span class="cle">[DEM1_ADRESSE]</span> est l'adresse de <span class="cle">[DEM1]</span>, et travaille normalement, sans jamais connaître le nom.</p>
+  <p><b>Le programme ne modifie jamais votre document.</b> À chaque anonymisation ou restitution, il crée un nouveau fichier à côté, dont le nom dit l'état : <span class="cle">…_ANONYMISE.docx</span> ou <span class="cle">…_RESTITUE.docx</span>. L'original reste intact. Les fichiers de travail qui citent les vrais noms (classeur de détection, rapport de contrôle) sont rangés dans un sous-dossier <span class="cle">_Privé</span> à côté du document : ne le joignez jamais, et ne le zippez pas avec le dossier.</p>
+  <p><b>Avec l'IA, le travail se fait sur le document balisé.</b> Vous déposez le fichier <span class="cle">…_ANONYMISE.docx</span>, l'IA raisonne et rédige avec les balises ; vous enregistrez sa réponse en Word, et le programme la restitue par la voie « sans journal » : les balises redeviennent les vrais noms.</p>
+  <div class="encadre">
+    <div class="t">L'essentiel : un onglet par dossier, pas par document</div>
+    <p><b>L'anonymisation ne se prépare pas document par document : elle se prépare une fois pour tout le dossier.</b> L'onglet d'un dossier, c'est la liste des noms de ce dossier (parties, dirigeants, avocats, adresses, marques, numéros) et de leurs balises. Une fois rempli et bien complété, il sert à <b>toutes</b> les pièces du dossier, passées et à venir : conclusions, assignation, courriers, contrats, pièces, réponses de l'IA. Pour anonymiser une nouvelle pièce, vous la choisissez, vous choisissez l'onglet, vous cliquez : rien d'autre. <b>Pas besoin de repasser par la détection.</b></p>
+    <p>La détection n'est qu'une aide pour <b>remplir</b> l'onglet au départ, puis pour l'<b>enrichir</b> : la liste des balises et des données n'a qu'à être complétée au fil du dossier. Un nom nouveau dans une pièce suivante ? Une ligne de plus dans l'onglet, à la main dans Excel, ou par une détection sur cette pièce, qui n'ajoute que ce qui manque. Plus le dossier avance, plus l'onglet est complet, et moins vous avez à faire.</p>
+    <p>C'est aussi ce qui rend le travail avec l'IA fiable : la même société est <span class="cle">[DEF1]</span> dans l'assignation, dans les conclusions et dans la réponse de l'IA. L'IA suit le dossier d'un document à l'autre sans jamais voir un nom, et n'importe quel document du dossier se restitue avec le même onglet.</p>
+  </div>
+
+
+  <div class="flux">
+    <div class="b" style="background:#2A6F77">1. Préparer la table</div><div class="fl">›</div>
+    <div class="b" style="background:#1B3A5C">2. Anonymiser</div><div class="fl">›</div>
+    <div class="b" style="background:#B23B3B">3. Contrôler</div><div class="fl">›</div>
+    <div class="b" style="background:#8A96A3">Vous déposez dans l'IA</div><div class="fl">›</div>
+    <div class="b" style="background:#2E7D4F">4. Restituer</div>
+  </div>
+
+  <p>En haut de la fenêtre, vous choisissez <b>le document</b>, <b>la table</b> et <b>le dossier</b>. Un dossier est un onglet de la table : une affaire, un contrat, un audit. Les quatre onglets du programme travaillent sur ce que vous avez choisi en haut.</p>
+
+</section>
+
+<section class="page">
+  <h2>Deux façons de préparer un dossier</h2>
+
+    <p><b>Le chemin rapide</b>, pour donner vite des pièces à une IA et obtenir une synthèse : Détecter, puis Injecter, puis Anonymiser. Vous n'avez rien à savoir du dossier. Ce que le programme reconnaît avec certitude est rangé par partie ([DEF1], [DEF1_ADRESSE]). Le reste reçoit une balise neutre selon sa nature ([SOCIETE5], [ADRESSE3], [TELEPHONE2]). Tout est masqué.</p>
+    <p><b>Le chemin précis</b>, pour des écritures ou un dossier où il faut savoir qui est qui : avant d'injecter, ouvrez le tableau (Étape 2). Sur chaque ligne à préciser, choisissez la Partie, puis le Rôle. Les parties connues sont affichées avec leur nom. « nouvelle partie » crée la suivante, numérotée toute seule.</p>
+    <p><b>Rattacher plus tard.</b> Vous découvrez dans une autre pièce à qui appartient [ADRESSE3] ? Dans l'onglet du dossier, changez la Partie de cette ligne. La case Balise passe en orange : la ligne prendra [DEF1_ADRESSE] au prochain usage. Les documents déjà anonymisés avec [ADRESSE3] restent restituables, même sans journal.</p>
+    <p><b>Quatre règles à retenir :</b> même numéro = même partie ; « nouvelle partie » donne le numéro suivant tout seul, sans limite ; rouge = deux identités différentes sous la même balise ; une balise déjà utilisée n'est jamais perdue, la restitution la reconnaît toujours.</p>
+  
+</section>
+
+
+<section class="page">
+  <div class="etapes">
+    <div class="etape teal"><div class="num">1</div><div class="titre">Préparer la table</div>
+      <p>Le programme lit le document (Word ou PDF, même scanné) et repère les noms, adresses, SIRET, avocats, marques, numéros RG, IBAN, numéros de sécurité sociale et dates de naissance. Il les range par partie dans un classeur <span class="cle">_Detection_….xlsx</span> créé dans le sous-dossier <span class="cle">_Privé</span>, à côté du document.</p>
+      <p><b>Étape 1 · Détecter</b> : le classeur est créé. Ce que le programme reconnaît avec certitude est rangé par partie (<span class="cle">[DEF1]</span>, <span class="cle">[DEF1_ADRESSE]</span>) ; le reste reçoit une balise neutre numérotée (<span class="cle">[SOCIETE5]</span>, <span class="cle">[ADRESSE3]</span>). Tout est à OUI, sauf les mots répétés non reconnus et les termes lus par OCR.</p>
+      <p><b>Étape 2 · Relire et valider dans Excel</b> (facultatif) : le bouton ouvre le classeur. <b>Chemin rapide</b> : rien à faire, passez à l'étape 3. <b>Chemin précis</b> (pour dire qui est qui) : sur une ligne, choisissez la <b>Partie</b> (qui ?) puis le <b>Rôle</b> (quoi ?) dans deux menus courts ; la balise s'écrit toute seule, avec son vrai numéro. Les parties connues sont affichées avec leur nom ; « nouvelle partie » (« SOCIETE+ ») crée la suivante, numérotée toute seule. Balise en <b>rouge</b> : deux identités différentes sous la même balise. Puis <b>enregistrez</b> et <b>fermez</b> le classeur.</p>
+      <p><b>Étape 3 · Injecter</b> : les lignes retenues entrent dans l'onglet du dossier. Classeur encore ouvert dans Excel ? Le programme vous le dit et n'écrit rien. L'injection réécrit l'onglet : vos ajouts en colonne K et suivantes, commentaires et filtres sont perdus (H à J : colonnes masquées du programme).</p>
+      <p>Cette étape est une aide : vous pouvez aussi remplir la table vous-même dans Excel (page 5).</p></div>
+    <div class="etape"><div class="num">2</div><div class="titre">Anonymiser</div>
+      <p>Crée <span class="cle">…_ANONYMISE.docx</span> à côté de l'original, et un journal dans <span class="cle">Journaux</span>.</p>
+      <p>Remplace partout : texte, tableaux, en-têtes et pieds de page, notes de bas de page, commentaires, zones de texte, propriétés du fichier (auteur, société). Les auteurs des commentaires et des modifications suivies deviennent « Auteur 1 », « Auteur 2 »… et retrouvent leur nom à la restitution. Le gras, l'italique et la mise en page sont conservés.</p>
+      <p>Si aucun terme du dossier choisi ne figure dans le document, le programme refuse : vous vous êtes probablement trompé de dossier.</p></div>
+  </div>
+  <div class="etapes">
+    <div class="etape rouge"><div class="num">3</div><div class="titre">Contrôler</div>
+      <p>Une seconde vérification, indépendante de la première. Le programme relit tout le fichier, y compris ce qui ne se voit pas à l'écran, ainsi que le nom du fichier et de ses dossiers.</p>
+      <p>Sur un document anonymisé, il cherche un vrai nom resté en clair. Sur un document restitué, il cherche une balise oubliée. Il signale aussi les balises recopiées de travers par l'IA, et met en alerte une balise de la table qui reprendrait le nom qu'elle masque ([AGICE] pour « AGICE EDITIQUE »).</p>
+      <p>Il relit enfin le document comme la pré-détection : IBAN, n° de sécurité sociale, mail ou téléphone absent de la table = <b>alerte</b> ; un nom (« M. Dupont ») est seulement listé <b>à vérifier</b>. Il écrit un rapport <span class="cle">_Controle_….txt</span> dans le sous-dossier <span class="cle">_Privé</span>.</p></div>
+    <div class="etape vert"><div class="num">4</div><div class="titre">Restituer</div>
+      <p>Remet les vrais noms dans un document balisé.</p>
+      <p><b>Avec le journal</b> : pour retrouver <b>votre propre document</b> anonymisé sur ce poste. Exacte, sans risque de mélanger deux dossiers.</p>
+      <p><b>Sans journal</b> : pour la <b>réponse de l'IA</b> enregistrée en Word (le journal ne la décrit pas), ou un document anonymisé ailleurs. Table du dossier choisi en haut ; première forme de chaque nom : relisez. Une balise recopiée de travers par l'IA n'est jamais restituée : elle est listée, à corriger à la main.</p>
+      <p>Crée <span class="cle">…_RESTITUE.docx</span> à côté du document.</p></div>
+  </div>
+
+  <div class="encadre alerte">
+    <div class="t">Un document restitué contient les vrais noms</div>
+    <p>Il peut partir au client ou au confrère. Il ne va <b>jamais</b> dans une IA. Le programme vous le rappelle à chaque restitution.</p>
+  </div>
+</section>
+
+<section class="page">
+  <h2>La table de correspondances</h2>
+  <p><span class="cle">Correspondances.xlsx</span> est un classeur Excel ordinaire, avec <b>un onglet par dossier</b>. Vous pouvez le remplir de deux façons, et les mélanger : par la pré-détection (onglet 1 du programme), ou <b>à la main dans Excel</b>.</p>
+
+  <table>
+    <tr><th>Terme original</th><th>Balise</th><th>Rôle</th><th>Partie</th><th>Actif ?</th></tr>
+    <tr class="groupe"><td colspan="5">DEM1</td></tr>
+    <tr><td>Société Horizon Numérique</td><td>[DEM1]</td><td>Identité</td><td>DEM1</td><td>OUI</td></tr>
+    <tr><td>Horizon Numérique / HORIZON NUMERIQUE</td><td>[DEM1]</td><td>Identité</td><td>DEM1</td><td>OUI</td></tr>
+    <tr><td>12 rue des Lilas, 59000 Lille</td><td>[DEM1_ADRESSE]</td><td>Adresse</td><td>DEM1</td><td>OUI</td></tr>
+    <tr><td>Madame Claire Vasseur</td><td>[DEM1_DIRIGEANT]</td><td>Dirigeant</td><td>DEM1</td><td>OUI</td></tr>
+    <tr><td>Maître Paul Lemaire</td><td>[DEM1_AVOCAT]</td><td>Avocat</td><td>DEM1</td><td>OUI</td></tr>
+    <tr class="groupe"><td colspan="5">DEF1</td></tr>
+    <tr><td>Société Atelier Bleu Marine</td><td>[DEF1]</td><td>Identité</td><td>DEF1</td><td>OUI</td></tr>
+    <tr class="groupe"><td colspan="5">ÉLÉMENTS COMMUNS</td></tr>
+    <tr><td>LUMIVRAC</td><td>[MARQUE1]</td><td>Marque</td><td>COMMUN</td><td>OUI</td></tr>
+    <tr><td>24/01234</td><td>[RG1]</td><td>Référence RG</td><td>COMMUN</td><td>OUI</td></tr>
+  </table>
+  <p class="petit">Extrait de l'onglet « Exemple » livré avec le programme. Toutes les données sont inventées.</p>
+
+  <div class="encadre">
+    <div class="t">Remplir ou corriger la table à la main</div>
+    <ul>
+      <li><b>Créer le dossier</b> : dans le programme, bouton <b>Nouveau dossier…</b>. L'onglet est créé au bon format. Ou, pour partir de toutes les balises déjà écrites (demandeur, défendeur, personnes physiques et morales, sociétés, commissaire, expert, éléments communs) : dans Excel, clic droit sur l'onglet <b>Modèle complet</b> › Déplacer ou copier › Créer une copie, puis renommez-la ; il ne reste qu'à remplir la colonne Terme, les lignes vides sont ignorées.</li>
+      <li><b>Ouvrir la table</b> : bouton <b>Ouvrir dans Excel</b>, ou double-clic sur <span class="cle">Correspondances.xlsx</span>.</li>
+      <li><b>Ajouter une ligne</b> : quarante lignes sont déjà préparées sous le tableau. Le vrai nom en colonne A, puis le <b>rôle</b> et la <b>partie</b> dans les menus déroulants : la balise s'écrit toute seule, numéro compris (<span class="cle">[DEM1_LOGICIEL]</span>, puis <span class="cle">[DEM1_LOGICIEL2]</span>), et la ligne prend la couleur de sa partie.</li>
+      <li><b>Une catégorie propre à votre spécialité</b> : un rôle absent du menu se tape librement, la balise se forme avec (« Clause type » et PRESTATAIRE donnent <span class="cle">[PRESTATAIRE_CLAUSE_TYPE]</span>). Un commissaire de justice, un expert, un salarié : partie COMMISSAIRE1, EXPERT1, SALARIE1 et rôle Identité.</li>
+      <li><b>Enregistrer</b> dans Excel (Ctrl+S). C'est tout : le programme relit la table à chaque clic sur un bouton. Il n'est pas nécessaire de le relancer. Si un nouvel onglet n'apparaît pas dans la liste « Dossier », cliquez sur <b>Actualiser</b>.</li>
+      <li><b>Fermer Excel</b> seulement quand le programme doit écrire dans la table lui-même (Nouveau dossier, Injecter) : Excel bloque le fichier tant qu'il est ouvert. Pour anonymiser, contrôler ou restituer, Excel peut rester ouvert.</li>
+    </ul>
+  </div>
+
+</section>
+
+<section class="page">
+  <h2>Bien remplir la table</h2>
+  <div class="deux">
+    <div>
+      <h3>Les colonnes</h3>
+      <p><b>Terme original</b> : le vrai nom, écrit exactement comme dans vos documents. Pour plusieurs écritures du même nom, deux solutions : une ligne par écriture avec la même balise, ou sur une seule ligne séparées par «&nbsp;/&nbsp;» (espace, barre, espace).</p>
+      <p><b>Balise</b> : ce qui remplace le nom, entre crochets, en majuscules : la partie, puis le rôle. Elle se calcule seule à partir des colonnes Rôle et Partie. Pour rattacher une ligne à une autre partie, changez sa Partie (pas sa balise) : la balise suivra au prochain usage (case en orange en attendant), et l'ancienne reste reconnue pour restituer les documents déjà anonymisés.</p>
+      <p><b>Rôle</b> : ce que le terme est pour la partie : Identité, Adresse, SIRET, Dirigeant, Avocat, E-mail, IBAN, NIR, Date de naissance, Marque, Référence RG…</p>
+      <p><b>Partie</b> : qui est concerné, en code court numéroté : DEM1, DEM2 (demandeurs), DEF1 (défendeur), APP1, INTIME1, INTERV1 en contentieux ; CLI (notre client), ADV (partie adverse) dans un courrier ; CLIENT, PRESTATAIRE dans un contrat ; SOCIETE1, PERSONNE_PHYSIQUE1, PERSONNE_MORALE1 pour les autres ; COMMUN pour ce qui n'appartient à personne (une marque en litige, un numéro RG, une adresse dont on ignore le titulaire). Ce qui appartient à une partie s'y rattache : [DEF1_ADRESSE], [DEF1_AVOCAT]. Même numéro = même partie. Chaque partie a sa couleur dans l'onglet : bleu nuit pour la première, bordeaux pour la seconde, gris pour le commun.</p>
+      <p><b>Actif ?</b> : OUI (ou vide) : le terme est remplacé. NON : la ligne est gardée pour mémoire, sans effet.</p>
+    </div>
+    <div>
+      <h3>Trois habitudes qui évitent les ennuis</h3>
+      <div class="regle"><div class="n">1</div><div>Un vrai nom = une seule balise pour tout le dossier. La forme longue (« Société Horizon Numérique ») sur la première ligne, les formes courtes ensuite, avec la même balise.</div></div>
+      <div class="regle"><div class="n">2</div><div>Pensez aux écritures qu'on oublie : le nom en majuscules, sans « Société », le nom de famille seul, l'adresse e-mail, le site web. Ce qui n'est pas dans la table reste en clair.</div></div>
+      <div class="regle"><div class="n">3</div><div>La table est votre clé. Elle ne se transmet jamais avec un document anonymisé, et ne se dépose jamais dans une IA.</div></div>
+      <h3>Les marqueurs de rédaction</h3>
+      <p class="petit">[DATE], [MONTANT], [A COMPLETER]… ressemblent à des balises mais n'en sont pas : seul ce qui est déclaré dans la table est une balise. Les marqueurs traversent l'anonymisation et la restitution sans être touchés.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PAGE 4 ============================ -->
+<section class="page">
+  <h2>Règles d'or et questions fréquentes</h2>
+
+  <div class="encadre">
+    <div class="t">Les trois règles</div>
+    <div class="regle"><div class="n">1</div><div><b>Contrôlez toujours</b> (onglet 3) avant de déposer un document dans une IA.</div></div>
+    <div class="regle"><div class="n">2</div><div><b>Un document restitué contient les vrais noms</b> : jamais dans une IA.</div></div>
+    <div class="regle"><div class="n">3</div><div><b>Relisez le document produit.</b> Le programme ne remplace que ce qui est dans la table. Le contrôle signale ce qui ressemble à une donnée personnelle hors table, mais ne peut pas tout voir.</div></div>
+  </div>
+
+  <dl class="faq">
+    <dt>J'ai modifié la table dans Excel : faut-il relancer le programme ?</dt>
+    <dd>Non. Enregistrez dans Excel : le programme relit la table à chaque clic. Cliquez sur <b>Actualiser</b> si un nouvel onglet n'apparaît pas dans la liste « Dossier ».</dd>
+
+    <dt>Le programme dit « Dossier sans rapport avec ce document ».</dt>
+    <dd>Aucun terme de l'onglet choisi n'apparaît dans le document. Vérifiez le dossier sélectionné en haut de la fenêtre. Le message indique l'onglet qui correspondrait.</dd>
+
+    <dt>La restitution sans journal refuse d'écrire.</dt>
+    <dd>Une balise du document manque dans l'onglet choisi. Le message la nomme. Ajoutez la ligne dans la table (ou choisissez le bon dossier), enregistrez, recommencez. Le programme préfère refuser que mélanger deux dossiers.</dd>
+
+    <dt>« Le classeur de correspondances est ouvert (dans Excel ?) ».</dt>
+    <dd>Le programme voulait écrire dans la table et Excel la bloque. Fermez Excel, recommencez. Rien n'a été modifié. Même chose pour le classeur de détection à l'étape 3 : enregistrez-le, fermez-le, puis Injecter.</dd>
+
+    <dt>J'ai plusieurs sociétés, personnes ou avocats : combien de numéros ?</dt>
+    <dd>Autant qu'il en faut. « nouvelle partie » donne le numéro suivant à chaque fois (SOCIETE2, SOCIETE3… SOCIETE15). Plusieurs avocats ou adresses d'une même partie se numérotent seuls : [DEF1_AVOCAT], [DEF1_AVOCAT2]… Les numéros ne redescendent jamais : un trou dans la suite ne gêne rien.</dd>
+
+    <dt>Un PDF : que peut-on en faire ?</dt>
+    <dd>La pré-détection (onglet 1) lit les PDF, natifs ou scannés, pour remplir la table. L'anonymisation, le contrôle et la restitution travaillent sur des documents Word (.docx). Pour anonymiser un PDF, convertissez-le d'abord en Word.</dd>
+
+    <dt>Le PDF scanné est lu, mais la détection propose des termes bizarres.</dt>
+    <dd>Le texte d'un scan est reconstitué par reconnaissance de caractères, donc approximatif (un « l » lu pour un « I », un accent perdu). C'est pourquoi aucune ligne venue d'un scan n'est proposée à OUI : vérifiez chaque terme contre le document réel.</dd>
+
+    <dt>Je travaille sur deux ordinateurs, ou avec un collaborateur.</dt>
+    <dd>Recopiez tout le dossier du programme sur l'autre poste. Un document anonymisé sur le poste A se restitue sur le poste B avec « Restituer sans journal », à condition que la table du poste B contienne les mêmes lignes. Le plus simple : utiliser le même fichier Correspondances.xlsx des deux côtés.</dd>
+
+    <dt>Puis-je avoir plusieurs tables ?</dt>
+    <dd>Oui, bouton <b>Ajouter une table…</b>. Chaque table a ses propres onglets. Utile pour séparer, par exemple, les dossiers du cabinet et les dossiers personnels.</dd>
+
+    <dt>Le programme fonctionne-t-il avec une IA ?</dt>
+    <dd>Non, à aucune étape. Détection, anonymisation, contrôle et restitution reposent sur des règles (civilités, formes de sociétés, adresses, SIRET…) et sur votre table. L'IA n'est que la destination du document anonymisé, et c'est vous qui l'y déposez.</dd>
+
+    <dt>Les documents sont-ils envoyés quelque part ?</dt>
+    <dd>Non. Le programme n'utilise pas internet. Documents, table et journaux restent sur votre ordinateur.</dd>
+
+    <dt>La détection n'a pas vu un nom.</dt>
+    <dd>Ajoutez la ligne vous-même dans l'onglet du dossier, sous la bonne partie, avec une balise sur le même modèle (par exemple [DEF1_SIGNATAIRE]). Enregistrez : c'est pris en compte.</dd>
+  </dl>
+
+  <p class="petit" style="margin-top:3mm">Anonymiseur est une aide : ce qui est déposé dans un outil d'IA reste sous la responsabilité de l'avocat qui le dépose. Programme développé par Aurélien Bougeard, avocat. Logiciel libre sous licence AGPL v3, code source joint. Tesseract OCR (dossier Tesseract) est un logiciel libre sous licence Apache 2.0 ; sa licence est jointe.</p>
+</section>
+
+</body>
+</html>
