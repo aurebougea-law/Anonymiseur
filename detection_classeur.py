@@ -737,3 +737,69 @@ def injecter(chemin_excel, nom_onglet, retenues, config):
             partie, role = modele.decomposer_balise(l["balise"], config)
             l["partie"], l["role"] = partie or "", role or ""
     return modele.injecter(chemin_excel, nom_onglet, retenues, config)
+
+
+# ==================================================================
+# MODE EXPRESS (8 novembre 2026)
+# ==================================================================
+# Un clic : detecter, ranger dans l'onglet du dossier ce que la detection
+# propose a OUI, anonymiser. Aucun passage par Excel. Le classeur de
+# detection est tout de meme ecrit dans _Prive : c'est lui qui permet, en
+# mode detaille, de corriger une balise apres coup. Les traitements sont
+# exactement ceux du mode detaille (memes fonctions, dans le meme ordre).
+
+def nom_dossier_libre(chemin_excel, chemin_doc):
+    """Nom d'onglet tire du nom du document, valide pour Excel et libre."""
+    base = os.path.splitext(os.path.basename(str(chemin_doc)))[0]
+    base = re.sub(r"[\[\]:*?/\\]", " ", base)
+    base = re.sub(r"\s+", " ", base).strip(" '") or "Dossier"
+    base = base[:31].strip()
+    wb = openpyxl.load_workbook(chemin_excel, read_only=True)
+    try:
+        pris = {n.lower() for n in wb.sheetnames}
+    finally:
+        wb.close()
+    nom, n = base, 2
+    while nom.lower() in pris or modele.nom_onglet_valide(nom):
+        suffixe = f" ({n})"
+        nom = base[:31 - len(suffixe)].strip() + suffixe
+        n += 1
+        if n > 500:
+            raise modele.ErreurModele("Aucun nom de dossier libre.")
+    return nom
+
+
+def traitement_express(chemin_doc, table, onglet, config_det, config_outil, chemin_config,
+                       type_doc=None, sens=None, demander_sens=None, progression=None,
+                       nom_nouveau=None):
+    """table : {"nom", "fichier"} ; onglet : dossier existant, ou None pour en
+    creer un, nomme nom_nouveau (le nom donne par l'utilisateur) ou, a
+    defaut, d'apres le document. Retourne un dictionnaire de compte rendu."""
+    import anonymisation_core as coeur
+    import detection_core as det
+    cree = not onglet
+    if cree:
+        onglet = modele.creer_onglet(
+            table["fichier"], nom_nouveau or nom_dossier_libre(table["fichier"], chemin_doc), config_det)
+    entites, infos, _, _ = det.analyser_document(
+        str(chemin_doc), table["fichier"], onglet, str(chemin_config), progression=progression,
+        type_doc=type_doc, sens=sens, demander_sens=demander_sens)
+    compte = {"onglet": onglet, "cree": cree, "detectes": len(entites), "retenus": 0,
+              "ecrits": [], "refuses": [], "classeur": "", "infos": infos}
+    if entites:
+        base = os.path.splitext(os.path.basename(str(chemin_doc)))[0]
+        sortie = os.path.join(coeur.dossier_prive(str(chemin_doc)), f"_Detection_{base}.xlsx")
+        _, existantes = modele.lire_onglet(table["fichier"], onglet)
+        ecrire_classeur_detection(sortie, entites, infos, config_det, str(chemin_doc),
+                                  table["nom"], onglet, existantes)
+        compte["classeur"] = sortie
+        retenues = lire_classeur_detection(sortie, config_det)
+        compte["retenus"] = len(retenues)
+        if retenues:
+            compte["ecrits"], compte["refuses"] = injecter(table["fichier"], onglet, retenues, config_det)
+    entrees = coeur.charger_entrees(table["fichier"], onglet)
+    if not entrees:
+        raise coeur.ErreurAnonymisation(textes.T("express_rien"))
+    compte["resultat"] = coeur.anonymiser_document(str(chemin_doc), entrees, config_outil,
+                                                   table["nom"], onglet)
+    return compte

@@ -379,10 +379,27 @@ _SOCIETE_LIEE_AVANT = re.compile(
 def _tetes_du_bloc(ctx, debut, fin):
     tetes = []
     for e in ctx.entites:
-        if e.type not in TYPES_TETE or e.partie or not ctx.dans(e, debut, fin):
+        if e.partie or not ctx.dans(e, debut, fin):
             continue
+        if e.type not in TYPES_TETE:
+            # « representee par sa gerante, Madame X BRIN epouse LUCAS » puis,
+            # ligne suivante, « Madame X LUCAS » en son nom : la meme personne
+            # est aussi une partie (4 novembre 2026).
+            if e.type != "representant_legal" or not any(
+                    debut <= c < fin and not (_DIRIGEANT_AVANT.search(ctx.T[max(0, c - 160):c])
+                                              or _DIRIGEANT_APRES.match(ctx.T, d))
+                    and not re.search(r"(?:REPRESENT|PERSONNE\s+DE|SON|SA)\W{0,3}[^\n]{0,40}$",
+                                      ctx.T[max(0, c - 60):c])
+                    for c, d in ctx.occurrences[id(e)]):
+                continue
         a = ctx.premiere_dans(e, debut, fin)
         if e.type == "personne_morale" and _SOCIETE_LIEE_AVANT.search(ctx.T[max(0, a - 60):a]):
+            continue
+        # Une personne citee dans le bloc SEULEMENT comme dirigeante
+        # (« representee par sa gerante, Madame X ») n'est pas une partie.
+        if e.type == "personne_physique" and all(
+                _DIRIGEANT_AVANT.search(ctx.T[max(0, c - 160):c]) or _DIRIGEANT_APRES.match(ctx.T, d)
+                for c, d in ctx.occurrences[id(e)] if debut <= c < fin):
             continue
         tetes.append(e)
     return sorted(tetes, key=lambda e: ctx.premiere_dans(e, debut, fin))

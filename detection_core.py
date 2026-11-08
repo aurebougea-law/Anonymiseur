@@ -190,11 +190,16 @@ def texte_docx(chemin):
     def para_texte(p, pages=True):
         # SAUT_PAGE devant le texte d'un passage qui ouvre une nouvelle page
         # (saut rendu par Word, ou saut de page force) : sert au numero de page.
+        # Tous les fragments du paragraphe, y compris ceux des LIENS et des
+        # insertions suivies : p.runs ne les donne pas. Une adresse mail que
+        # Word a transformee en lien (le cas courant) echappait ainsi a la
+        # detection (8 novembre 2026). Les zones de texte sont lues a part.
+        from docx.text.run import Run
         parts = []
-        for r in p.runs:
-            if pages and r._r.xpath('.//w:lastRenderedPageBreak | .//w:br[@w:type="page"]'):
+        for r in p._p.xpath('.//w:r[not(ancestor::w:txbxContent)][not(ancestor::w:del)]'):
+            if pages and r.xpath('.//w:lastRenderedPageBreak | .//w:br[@w:type="page"]'):
                 parts.append(SAUT_PAGE + "\n")      # le texte suivant reste en debut de ligne
-            parts.append(r.text)
+            parts.append(Run(r, p).text)
         return "".join(parts)
 
     for p in doc.paragraphs:
@@ -564,9 +569,37 @@ def _detecter_personnes(texte):
             for candidate in candidates:
                 if len(candidate) > 2 and re.search(rf"\b{re.escape(candidate)}\b", texte):
                     e.ajouter_variante(candidate)
+        _variantes_nom_d_usage(texte, m, civilite, nom, e)
         entites.append(e)
 
     return entites
+
+
+# « Madame Jeanne BRIN épouse LUCAS », « Madame Jeanne LUCAS née BRIN » : une
+# seule personne sous deux noms. Sans cela, la detection creait une seconde
+# personne pour le nom d'usage, cite seul plus loin (4 novembre 2026).
+MOTIF_NOM_D_USAGE = re.compile(
+    rf"[^\S\n]*,?[^\S\n]*\(?(?:[ée]pouse|[ÉE]POUSE|[ée]p\.|n[ée]e|N[ÉE]E|veuve|VEUVE|divorc[ée]e"
+    rf"|d[ie]te?|alias|ALIAS)[^\S\n]+({NOM_PROPRE})")
+
+
+def _variantes_nom_d_usage(texte, m, civilite, nom, e):
+    suite = MOTIF_NOM_D_USAGE.match(texte, m.end())
+    if not suite:
+        return
+    autre = _nettoyer_nom(suite.group(1))
+    if not autre or len(autre) < 2:
+        return
+    mots = nom.split()
+    prenoms = mots[:-1] if len(mots) >= 2 else []
+    formes = [texte[m.start():suite.end()].strip(), f"{nom} {texte[m.end():suite.end()].strip()}",
+              autre, f"{civilite} {autre}"]
+    if prenoms:
+        formes += [f"{' '.join(prenoms)} {autre}", f"{civilite} {' '.join(prenoms)} {autre}"]
+    for forme in formes:
+        forme = re.sub(r"\s+", " ", forme).strip(" ,()")
+        if len(forme) > 2 and re.search(rf"(?<!\w){re.escape(forme)}(?!\w)", texte):
+            e.ajouter_variante(forme)
 
 
 CIVILITES_FEMININES = ("madame", "mademoiselle", "mme", "mle", "mmes", "mrs", "ms", "miss")

@@ -116,6 +116,31 @@ FR = {
     "anonymiser_note": ("Crée  <document>_ANONYMISE.docx  à côté de l'original, et un journal dans "
                         "le dossier Journaux : c'est lui qui permettra de restituer exactement les "
                         "vrais noms."),
+    "express_bouton": "Mode express  ·  Détecter et anonymiser en un clic",
+    "express_note": ("Choisissez le document Word, puis cliquez : le programme repère les noms, adresses, "
+                     "SIRET, avocats…, les range dans le dossier choisi en haut (créez-en un avec « Nouveau "
+                     "dossier… » pour une nouvelle affaire) et anonymise. Aucun passage par Excel. Relisez ensuite le "
+                     "document produit, puis passez par « 3. Contrôler »."),
+    "express_detaille": "Mode détaillé : avec le dossier choisi ci-dessus, déjà rempli",
+    "express_choisir_dossier": ("Choisissez d'abord le dossier en haut de la fenêtre, ou créez-en un "
+                                "avec le bouton « Nouveau dossier… »."),
+    "express_annule": "Mode express arrêté : rien n'a été modifié.",
+    "express_en_cours": "Mode express : détection et anonymisation en cours…",
+    "express_rien": ("Aucun nom, adresse ou numéro n'a été reconnu dans ce document : rien à "
+                     "anonymiser. Remplissez le dossier à la main, ou par l'onglet « 1. Préparer la "
+                     "table »."),
+    "express_autre_dossier_titre": "Dossier sans rapport avec le document",
+    "express_autre_dossier": ("Le dossier choisi, « {o} », ne contient aucun nom de ce document.\n\n"
+                              "Choisissez le bon dossier en haut de la fenêtre, ou créez-en un avec "
+                              "le bouton « Nouveau dossier… ». Rien n'a été modifié."),
+    "express_existant": "rempli ou complété",
+    "express_resultat": ("Dossier : « {o} » ({etat}).\n{e} terme(s) ajouté(s) au dossier ; {n} "
+                         "remplacement(s) dans le document.\n\nDocument anonymisé :\n{s}\n\n"
+                         "Relisez-le, puis passez par « 3. Contrôler » avant tout dépôt dans une IA.\n\n"
+                         "Une balise à préciser (qui est qui) ? Ouvrez l'onglet « 1. Préparer la "
+                         "table » : le classeur de détection de ce document y est déjà choisi."),
+    "express_incertains": ("\n\n{v} mot(s) incertain(s) n'ont pas été masqués (mots répétés non "
+                           "reconnus : produit, personne, lieu ?). Le contrôle vous les montrera."),
     "avant_anonymiser": "Avant d'anonymiser",
     "avant_anonymiser_texte": (
         "Le programme vérifie que le dossier choisi correspond bien au document. Si aucun terme "
@@ -191,7 +216,8 @@ FR = {
                             "documents Word (.docx).\n\nUn PDF ne sert qu'à la pré-détection "
                             "(onglet « 1. Préparer la table »)."),
     "dossier_manquant": "Dossier manquant",
-    "choisir_table_dossier": "Choisissez la table et le dossier concernés.",
+    "choisir_table_dossier": ("Choisissez le dossier en haut de la fenêtre, ou créez-en un avec le "
+                              "bouton « Nouveau dossier… »."),
     "anonymisation_en_cours": "Anonymisation en cours…",
     "verification_dossier": "Vérification du dossier…",
     "dossier_sans_rapport": "Dossier sans rapport avec ce document",
@@ -349,8 +375,9 @@ FR = {
              "La même société reste [DEF1] d'un document à l'autre : l'IA suit le dossier "
              "sans jamais voir un nom."),
         ("titre", "Deux façons de préparer un dossier"),
-        ("", "Le chemin rapide, pour donner vite des pièces à une IA et obtenir une synthèse : "
-             "Détecter, puis Injecter, puis Anonymiser. Vous n'avez rien à savoir du dossier. Ce que le "
+        ("", "Le chemin rapide, pour donner vite des pièces à une IA et obtenir une synthèse : le "
+             "MODE EXPRESS de l'onglet « 2. Anonymiser ». Choisissez le document, cliquez : le programme "
+             "détecte, range dans le dossier et anonymise, sans passer par Excel. Vous n'avez rien à savoir du dossier. Ce que le "
              "programme reconnaît avec certitude est rangé par partie ([DEF1], [DEF1_ADRESSE]). Le reste "
              "reçoit une balise neutre selon sa nature ([SOCIETE5], [ADRESSE3], [TELEPHONE2]). Tout est "
              "masqué.\n"
@@ -528,6 +555,30 @@ EN = {
     "anonymiser_bouton": "Anonymise the document",
     "anonymiser_note": ("Creates  <document>_ANONYMISED.docx  next to the original, plus a log in "
                         "the Logs folder: the log is what restores the real names exactly."),
+    "express_bouton": "Express mode  ·  Detect and anonymise in one click",
+    "express_note": ("Choose the Word document, then click: the program finds names, addresses, company "
+                     "numbers, lawyers…, stores them in the matter chosen at the top (create one with \"New "
+                     "matter…\" for a new case) and anonymises. No Excel step. Then read the output "
+                     "document and use \"3. Check\"."),
+    "express_detaille": "Detailed mode: with the matter chosen above, already filled",
+    "express_choisir_dossier": ("First choose the matter at the top of the window, or create one "
+                                "with the \"New matter…\" button."),
+    "express_annule": "Express mode stopped: nothing was changed.",
+    "express_en_cours": "Express mode: detection and anonymisation in progress…",
+    "express_rien": ("No name, address or number was recognised in this document: nothing to "
+                     "anonymise. Fill the matter by hand, or through the \"1. Prepare the table\" tab."),
+    "express_autre_dossier_titre": "Matter unrelated to the document",
+    "express_autre_dossier": ("The chosen matter, \"{o}\", contains no name from this document.\n\n"
+                              "Choose the right matter at the top of the window, or create one with "
+                              "the \"New matter…\" button. Nothing was changed."),
+    "express_existant": "filled or completed",
+    "express_resultat": ("Matter: \"{o}\" ({etat}).\n{e} term(s) added to the matter; {n} "
+                         "replacement(s) in the document.\n\nAnonymised document:\n{s}\n\n"
+                         "Read it, then use \"3. Check\" before uploading it to any AI tool.\n\n"
+                         "A tag to refine (who is who)? Open the \"1. Prepare the table\" tab: this "
+                         "document's detection workbook is already selected there."),
+    "express_incertains": ("\n\n{v} uncertain word(s) were not masked (repeated words not "
+                           "recognised: product, person, place?). The check will show them."),
     "avant_anonymiser": "Before anonymising",
     "avant_anonymiser_texte": (
         "The program checks that the chosen matter matches the document. If no term of the "
@@ -599,7 +650,8 @@ EN = {
                             "\n\nA PDF is only used for pre-detection (tab \"1. Prepare the "
                             "table\")."),
     "dossier_manquant": "No matter",
-    "choisir_table_dossier": "Choose the table and the matter.",
+    "choisir_table_dossier": ("Choose the matter at the top of the window, or create one with the "
+                              "\"New matter…\" button."),
     "anonymisation_en_cours": "Anonymising…",
     "verification_dossier": "Checking the matter…",
     "dossier_sans_rapport": "Matter unrelated to this document",
@@ -747,8 +799,9 @@ EN = {
              "and every document benefits. The same company stays [DEF1] from one document "
              "to the next: the AI follows the matter without ever seeing a name."),
         ("titre", "Two ways to prepare a matter"),
-        ("", "The quick path, to hand documents to an AI fast and get a summary: Detect, then Inject, "
-             "then Anonymise. You need to know nothing about the matter. What the program recognises "
+        ("", "The quick path, to hand documents to an AI fast and get a summary: the EXPRESS MODE of "
+             "the \"2. Anonymise\" tab. Choose the document, click: the program detects, stores in the "
+             "matter and anonymises, with no Excel step. You need to know nothing about the matter. What the program recognises "
              "with certainty is sorted by party ([DEF1], [DEF1_ADDRESS]). The rest gets a neutral tag by "
              "its nature ([COMPANY5], [ADDRESS3], [PHONE2]). Everything is masked.\n"
              "The precise path, for pleadings or a matter where who is who matters: before injecting, "

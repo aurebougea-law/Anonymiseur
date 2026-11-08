@@ -1762,6 +1762,85 @@ L'intérêt à agir a été mis en évidence par MM. Cornu et Foyer. « Une asso
                      str([e.canonique for e in ents if e.type in ("adresse", "toque")]))
             verifier(f"[{nom}] pas de bruit : Registre, Sociétés, Document, Sans, Vice-Présidente",
                      not [e for e in ents if e.canonique in ("Registre", "Sociétés", "Document", "Sans", "Vice-Présidente")])
+        # « Madame X BRIN épouse LUCAS » puis « Madame X LUCAS » : une seule personne
+        cfg_d = json.loads(cfg_reel.read_text(encoding="utf-8"))
+        for libelle, t_usage, attendu in (
+                ("partie en son nom ET dirigeante",
+                 "POUR :\nLa société LES ATELIERS ZORVAL, représentée par sa gérante, Madame Jeanne BRIN épouse LUCAS,\n"
+                 "Madame Jeanne LUCAS, demeurant 3 rue Haute, 59000 Lille,\nDemanderesses\nCONTRE :\n"
+                 "La société ALPHA SAS\nDéfenderesse\nPLAISE AU TRIBUNAL\nMadame LUCAS a constaté.", "[DEM2]"),
+                ("dirigeante seulement",
+                 "POUR :\nLa société LES ATELIERS ZORVAL, représentée par sa gérante, Madame Jeanne BRIN épouse LUCAS,\n"
+                 "Demanderesse\nCONTRE :\nLa société ALPHA SAS\nDéfenderesse\nPLAISE AU TRIBUNAL\n"
+                 "Madame LUCAS a constaté.", "[DEM1_DIRIGEANT]")):
+            es = det.detecter(t_usage)
+            roles.attribuer_roles(t_usage, es, cfg_d)
+            pp = [e for e in es if e.type in ("personne_physique", "representant_legal")]
+            verifier(f"nom d'usage (« épouse ») : une seule personne, {libelle} -> {attendu}",
+                     len(pp) == 1 and pp[0].balise == attendu
+                     and {"Madame LUCAS", "BRIN", "LUCAS"} <= set(pp[0].variantes),
+                     str([(e.canonique, e.balise, e.variantes) for e in pp]))
+        # 8/11/2026 : une adresse mail transformee en LIEN par Word etait invisible
+        from docx.oxml import parse_xml
+        from docx.oxml.ns import nsdecls
+        doc_l = Document()
+        p_l = doc_l.add_paragraph("Contact : ")
+        rid = doc_l.part.relate_to("mailto:jeanne.zorval@exemple-fictif.fr",
+                                   "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+                                   is_external=True)
+        p_l._p.append(parse_xml(f'<w:hyperlink {nsdecls("w", "r")} r:id="{rid}"><w:r><w:t>'
+                                f'jeanne.zorval@exemple-fictif.fr</w:t></w:r></w:hyperlink>'))
+        p_l.add_run(", ou par téléphone.")
+        chemin_l = racine / "mail_en_lien.docx"
+        doc_l.save(chemin_l)
+        verifier("une adresse mail en lien hypertexte est détectée",
+                 any(e.type == "email" and e.canonique == "jeanne.zorval@exemple-fictif.fr"
+                     for e in det.detecter(det.texte_docx(str(chemin_l)))),
+                 repr(det.texte_docx(str(chemin_l))))
+        # ---------------- 8/11/2026 : mode express ----------------
+        print("\n[8/11/2026] Mode express : détecter, ranger et anonymiser en un clic")
+        import anonymisation_core as coeur_x
+        table_x = racine / "Table_express.xlsx"
+        wb_x = openpyxl.Workbook()
+        wb_x.active.title = "Mode d'emploi"
+        wb_x.save(table_x)
+        t_x = {"nom": "Table express", "fichier": str(table_x)}
+        cfg_outil_x = {"dossier_journaux": str(racine / "Journaux_express")}
+        cfg_det_x = det.charger_config_detection(cfg_reel)
+        doc_x = racine / "Conclusions express.docx"
+        conclusions_4_11(doc_x)
+        cr = outil.traitement_express(doc_x, t_x, None, cfg_det_x, cfg_outil_x, cfg_reel)
+        texte_x = coeur_x.texte_du_document(cr["resultat"]["chemin_sortie"])
+        verifier("express : un dossier est créé au nom du document",
+                 cr["cree"] and cr["onglet"] == "Conclusions express"
+                 and "Conclusions express" in openpyxl.load_workbook(table_x, read_only=True).sheetnames,
+                 str(cr["onglet"]))
+        verifier("express : les termes sont rangés dans le dossier, sans passer par Excel",
+                 len(cr["ecrits"]) >= 15 and os.path.isfile(cr["classeur"]), f"{len(cr['ecrits'])} écrit(s)")
+        verifier("express : le document est anonymisé, plus aucun nom ni mail en clair",
+                 not any(n in texte_x for n in ("VELMORA", "HALDOR", "ARNOULT", "PERRIGAULT", "FAURIEL",
+                                                "KALBACH", "arnoult-avocats", "Malesherbes"))
+                 and "[DEM1]" in texte_x and "[DEF1]" in texte_x, texte_x[:400])
+        doc_x2 = racine / "Pièce 2.docx"
+        conclusions_4_11(doc_x2, recollees=True)
+        cr2 = outil.traitement_express(doc_x2, t_x, cr["onglet"], cfg_det_x, cfg_outil_x, cfg_reel)
+        texte_x2 = coeur_x.texte_du_document(cr2["resultat"]["chemin_sortie"])
+        verifier("express : une 2e pièce complète le même dossier, mêmes balises",
+                 not cr2["cree"] and cr2["onglet"] == "Conclusions express"
+                 and "[DEM1]" in texte_x2 and "VELMORA" not in texte_x2, texte_x2[:300])
+        doc_x3 = racine / "Autre pièce.docx"
+        conclusions_4_11(doc_x3)
+        cr3 = outil.traitement_express(doc_x3, t_x, None, cfg_det_x, cfg_outil_x, cfg_reel,
+                                       nom_nouveau="Affaire Velmora")
+        verifier("express : le nouveau dossier prend le nom donné par l'utilisateur",
+                 cr3["cree"] and cr3["onglet"] == "Affaire Velmora", cr3["onglet"])
+        verifier("express : un nom de dossier déjà pris reçoit un numéro",
+                 outil.nom_dossier_libre(str(table_x), doc_x) == "Conclusions express (2)")
+        restit = coeur_x.desanonymiser_avec_journal(cr["resultat"]["chemin_sortie"],
+                                                    cr["resultat"]["chemin_journal"])
+        verifier("express : la restitution avec journal rend le texte d'origine",
+                 coeur_x.texte_du_document(restit["chemin_sortie"]) == coeur_x.texte_du_document(str(doc_x)))
+
         chemin_c = racine / "conclusions_4_11_0.docx"
         ents = det.analyser_document(str(chemin_c), chemin_config=str(cfg_reel))[0]
         verifier("[natives] adresse sur deux paragraphes : une entité par ligne, chacune trouvable",

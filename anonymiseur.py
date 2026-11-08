@@ -33,7 +33,7 @@ import subprocess
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk, simpledialog
 
-VERSION = "2026.10.1"
+VERSION = "2026.11.1"
 
 # Mise a l'echelle Windows (125 %, 150 %) : evite une fenetre qui deborde.
 if sys.platform == "win32":
@@ -606,8 +606,15 @@ class App(tk.Tk):
 
     def _onglet_anonymiser(self):
         c = self._page(T("onglet_anonymiser"), BLEU, T("anonymiser_intro"))
-        b = bouton_action(c, T("anonymiser_bouton"), BLEU, lambda: self._lancer("anonymiser"), 11)
+        # Mode express (8/11/2026) : detecter, ranger et anonymiser en un clic
+        b = bouton_action(c, T("express_bouton"), VERT, self._express, 11)
         b.pack(fill="x", pady=(10, 2))
+        self.boutons_actions.append(b)
+        paragraphe(c, T("express_note")).pack(fill="x")
+        tk.Label(c, text=T("express_detaille"), font=police(10, gras=True), bg=CARTE,
+                 fg=TEXTE, anchor="w").pack(fill="x", pady=(16, 0))
+        b = bouton_action(c, T("anonymiser_bouton"), BLEU, lambda: self._lancer("anonymiser"), 11)
+        b.pack(fill="x", pady=(6, 2))
         self.boutons_actions.append(b)
         paragraphe(c, T("anonymiser_note")).pack(fill="x")
         self._encadre(c, T("avant_anonymiser"), T("avant_anonymiser_texte"))
@@ -683,10 +690,12 @@ class App(tk.Tk):
                 messagebox.showerror(T("table_illisible"), str(e))
             return
         self.combo_onglet.config(values=onglets)
+        # Aucun dossier n'est preselectionne (8/11/2026) : l'utilisateur choisit
+        # ou cree le sien, sinon un document finit dans le dossier d'un autre.
         if garder_choix and ancien in onglets:
             self.nom_onglet.set(ancien)
         else:
-            self.nom_onglet.set(onglets[0] if onglets else "")
+            self.nom_onglet.set("")
 
     def _actualiser_tout(self):
         ancienne_table, ancien_onglet = self.nom_table.get(), self.nom_onglet.get()
@@ -1230,6 +1239,81 @@ class App(tk.Tk):
                 messagebox.showerror(T("detection_interrompue_titre"), str(e))
 
         self._en_arriere_plan(travail, puis, sur_erreur)
+
+    def _express(self):
+        """Mode express : detection, rangement des termes proposes a OUI dans le
+        dossier (cree au nom du document s'il n'y en a pas), anonymisation."""
+        if not self._exige_docx():
+            return
+        table = self._table_courante()
+        if not table:
+            messagebox.showwarning(T("dossier_manquant"), T("choisir_table_dossier"))
+            return
+        if ouvert_dans_excel(table["fichier"]):
+            messagebox.showwarning(T("excel_ouvert_titre"),
+                                   T("table_ouverte_excel").format(s=table["fichier"]))
+            return
+        chemin, onglet = self.chemin_doc.get(), self.nom_onglet.get()
+        type_doc, sens = self._type_choisi(), self._sens_choisi()
+        # Le mode express range toujours dans le dossier choisi en haut : pas
+        # de dossier cree d'office ni de question supplementaire (8/11/2026).
+        if not onglet:
+            messagebox.showwarning(T("dossier_manquant"), T("express_choisir_dossier"))
+            return
+        try:
+            ancien = modele.modele_onglet(table["fichier"], onglet) == "ancien"
+        except Exception:
+            ancien = False
+        if ancien:
+            messagebox.showwarning(T("ancien_bloque_titre"), T("express_choisir_dossier"))
+            return
+        self._statut(T("express_en_cours"))
+
+        def progression(page, total):
+            self._statut(T("ocr_page").format(p=page, t=total), AMBRE)
+
+        def demander_sens():
+            return self._depuis_la_tache(self._demander_sens)
+
+        def travail():
+            # Dossier deja rempli mais sans aucun nom de ce document : on
+            # s'arrete plutot que de melanger deux affaires.
+            try:
+                entrees = coeur.charger_entrees(table["fichier"], onglet)
+                classement = coeur.analyser_pertinence(chemin, [table], self.config_outil) \
+                    if entrees else []
+            except Exception:
+                entrees, classement = [], []
+            choisi = next((r for r in classement if r["onglet"] == onglet), None)
+            if entrees and choisi is not None and choisi["trouvees"] == 0:
+                return {"sans_rapport": True}
+            return classeur.traitement_express(
+                chemin, table, onglet, self.config_det, self.config_outil,
+                CHEMIN_CONFIG_DETECTION, type_doc=type_doc, sens=sens,
+                demander_sens=demander_sens, progression=progression)
+
+        def puis(compte):
+            if compte.get("sans_rapport"):
+                self._statut(T("express_annule"))
+                messagebox.showwarning(T("express_autre_dossier_titre"),
+                                       T("express_autre_dossier").format(o=onglet))
+                return
+            self._maj_onglets(silencieux=True)
+            self.nom_onglet.set(compte["onglet"])
+            if compte.get("classeur"):
+                self.chemin_detection.set(compte["classeur"])
+            res = compte["resultat"]
+            msg = T("express_resultat").format(
+                o=compte["onglet"], etat=T("express_existant"),
+                e=len(compte["ecrits"]), n=res["total"], s=res["chemin_sortie"])
+            incertains = compte["detectes"] - compte["retenus"]
+            if incertains > 0:
+                msg += T("express_incertains").format(v=incertains)
+            for a in res.get("avertissements", [])[:8]:
+                msg += T("attention").format(a=a)
+            self._succes(res["total"], os.path.basename(res["chemin_sortie"]), msg)
+
+        self._en_arriere_plan(travail, puis)
 
     def _demander_sens(self):
         oui = messagebox.askyesno(T("sens_question_titre"), T("sens_question"))
